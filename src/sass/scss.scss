@@ -1739,6 +1739,109 @@ padding-top: 50px;
       text-transform: uppercase;
     }
   }
+  .footer-main{
+    .middle-part{
+      gap: 50px;
+      position: absolute;
+      top: 30%;
+      left: 5%;
+      .logo-icons{
+        width: 400px;
+        gap: 15px;
+        display: flex;
+        flex-direction: column;
+        .logo img{
+          height: 80px;
+          width: 150px;
+        }
+        .text{
+          color: white;
+          font-size: 14px;
+         
+          width: 300px;
+        }
+        .icons{
+          .icons-container{
+            padding-left: 0 !important;
+            display: flex;
+            gap: 10px;
+            .icon i{
+              color: white;
+              background-color: #B67961;
+              font-size: 17px;
+              padding: 7px 9px;
+              cursor: pointer;
+              transition: 0.3s;
+              &:hover {
+                color: black;
+                
+                animation-name: example;
+                animation-duration: 2s;
+                @keyframes example {
+                  0%   {background-color: red;
+                    transform: scale(1);
+                  }
+                  25%  {background-color: yellow;
+                    transform: scale(1.1);}
+                  50%  {background-color: green;
+                    transform: scale(1.2);}
+                  100% {background-color:#5E959F ;
+                    transform: scale(1);}
+                }
+              }
+            }
+          }
+        }
+      }
+      .costumer-service{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      li:first-child{
+        font-size: 18px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        color: white;
+      }
+      li a{
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: 200;
+        transition: 0.3s;
+        &:hover{
+          color: #5E959F;
+        }
+      }
+       
+      }
+      .reach-us{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      li:first-child{
+        font-size: 18px;
+        padding-bottom: 15px;
+        font-weight: 500;
+        color: white;
+      
+      }
+      li{
+        color: white;
+        font-size: 16px;
+        font-weight: 200;
+        gap: 10px;
+        justify-content: flex-start;
+        i{
+          padding-bottom: 10px;
+        }
+      }
+
+      }
+    }
+   
+   
+  }
 }
  
 }
