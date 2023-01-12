@@ -1,11 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect} from "react"
 function ProductsLand() {
+    const [products,setProducts]=useState([])
     useEffect(() => {
         AOS.init({ duration: 1300 });
     }, [])
+
+   
   return (
     <>
     <section className="our-products">

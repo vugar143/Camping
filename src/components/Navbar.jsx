@@ -2,7 +2,8 @@ import React from 'react'
 import {NavLink} from "react-router-dom"
 import {useState,useEffect} from "react"
 import {Button} from "react-bootstrap"
-function Navbar() {
+import {connect} from 'react-redux'
+function Navbar({basket,dispatch}) {
   // $(window).on('scroll',function(){
   //   if($(window).scrollTop()){
   //     $('navbar').addClass('black')
@@ -63,13 +64,17 @@ function Navbar() {
       <li className="nav-item">
         <NavLink className="nav-links-mobile" end to="/signup">Sign Up</NavLink>
       </li>
-      
-
+      <li className="nav-item">
+        <NavLink className="nav-links" end to="/basket"><i className="fa-solid fa-basket-shopping"></i><sub>{basket.length?basket.length:null}</sub></NavLink>
+      </li>
+      <li className="nav-item">
+        <NavLink className="nav-links" end to="/basket"><i className="fa-solid fa-heart"></i></NavLink>
+      </li>
     </ul>
    
    </nav>
    </>
   )
 }
-
-export default Navbar
+const t=(a)=>a
+export default connect(t) (Navbar)

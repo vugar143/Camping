@@ -26,11 +26,11 @@ function Footer() {
 </p></li>
                     <li className='icons'>
                         <ul className='icons-container'>
-                            <li className='icon'><i class="fa-brands fa-facebook-f"></i></li>
-                            <li className='icon'><i class="fa-brands fa-twitter"></i></li>
-                            <li className='icon'><i class="fa-brands fa-youtube"></i></li>
-                            <li className='icon'><i class="fa-brands fa-instagram"></i></li>
-                            <li className='icon'><i class="fa-brands fa-behance"></i></li>
+                            <li className='icon'><i className="fa-brands fa-facebook-f"></i></li>
+                            <li className='icon'><i className="fa-brands fa-twitter"></i></li>
+                            <li className='icon'><i className="fa-brands fa-youtube"></i></li>
+                            <li className='icon'><i className="fa-brands fa-instagram"></i></li>
+                            <li className='icon'><i className="fa-brands fa-behance"></i></li>
                         </ul>
                     </li>
                 </ul>
@@ -55,9 +55,9 @@ function Footer() {
                 </ul>
                 <ul className='reach-us'>
                     <li>Reach Us</li>
-                    <li className='location df'><i class="fa-solid fa-location-pin"></i><p>Jln Cempaka Wangi No 22 <br /> Jakarta - Indonesia</p> </li>
-                    <li className='phone df'><i class="fa-sharp fa-solid fa-phone"></i><p>+6221 2002 2012</p></li>
-                    <li className='mail df'><i class="fa-solid fa-envelope"></i><p>hello@yourdomain.tld</p></li>
+                    <li className='location df'><i className="fa-solid fa-location-pin"></i><p>Jln Cempaka Wangi No 22 <br /> Jakarta - Indonesia</p> </li>
+                    <li className='phone df'><i className="fa-sharp fa-solid fa-phone"></i><p>+6221 2002 2012</p></li>
+                    <li className='mail df'><i className="fa-solid fa-envelope"></i><p>hello@yourdomain.tld</p></li>
 
                 </ul>
                 </div>
