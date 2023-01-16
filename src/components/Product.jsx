@@ -2,14 +2,14 @@ import React from 'react'
 import{connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 function Product({ item,basket,dispatch }) {
-    const check=basket.find((a)=>a.id===item.id)
-  const handleClick=()=>{
+  const check=basket.find((a)=>a.id===item.id)
+  const handleClick=(e)=>{
+    e.preventDefault()
     if(check){
-     let t= basket.filter((a)=>!a.id==item.id)
-     dispatch({
-      type:"SET_BASKET",
-      payload:t
-     })
+        dispatch({
+            type:"REMOVE_BASKET",
+            payload:item.id,
+        })
      return
     }
     dispatch({
@@ -19,9 +19,10 @@ function Product({ item,basket,dispatch }) {
       }]
      })
   }
+
     return (
         <>
-            <Link className="product">
+            <Link className="product" to={`/details/${item.id}`}>
                 <img src={item.image} alt="" />
                 <div className="product-sale">Sale!</div>
                 <div className="product-info">
@@ -31,6 +32,7 @@ function Product({ item,basket,dispatch }) {
                 </div>
             </Link>
         </>
+
     )
 }
 const t=(a)=>a

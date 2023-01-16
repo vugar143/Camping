@@ -25,6 +25,7 @@
     "react-spring": "^9.6.1",
     "redux": "^4.2.0",
     "sass": "^1.56.1",
+    "sweetalert2": "^11.7.0",
     "swiper": "^8.4.5"
   },
   "devDependencies": {

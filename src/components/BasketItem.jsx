@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from "react-redux"
+import {Link} from "react-router-dom"
+import Swal from 'sweetalert2'
 function BasketItem({ products, item, basket, dispatch }) {
 
     let product = products.find((a) => a.id === item.id)
@@ -40,17 +42,40 @@ function BasketItem({ products, item, basket, dispatch }) {
 
         <>
             <tr>
-
-                <td className='product-image'><img src={product.image} alt="" /></td>
-                <td>{product.title.slice(0, 16)}...</td>
+            
+                <td className='product-image'><Link className="product" to={`/details/${item.id}`}> <img src={product.image} alt="" /></Link></td>
+                <td><Link className="product" to={`/details/${item.id}`}>{product.title.slice(0, 16)}...</Link></td>
                 <td>${product.price}</td>
                 <td> <div className="operations df">
-                    <button onClick={increase} className='inc-btn'>+</button>
-                    <p>{item.count}</p>
                     <button onClick={decrease} className='dec-btn'>-</button>
+                    <p>{item.count}</p>
+                    <button onClick={increase} className='inc-btn'>+</button>
                 </div> </td>
                 <td><h1 className='subtotal'>${(product.price * item.count).toFixed(2)}</h1></td>
-                <td><button onClick={remove} className='remove'>Remove</button></td>
+                <td><button onClick={()=>{
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            dispatch({
+                                type:"REMOVE_BASKET",
+                                payload:item.id
+                            })
+                          Swal.fire(
+                            'Deleted!',
+                            'Your file has been deleted.',
+                            'success'
+                          )
+                        }
+                      })
+                }} className='remove'><i className="fa-solid fa-trash"></i></button></td>
+               
             </tr>
 
 

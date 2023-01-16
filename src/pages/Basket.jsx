@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import BasketItem from '../components/BasketItem'
 import { useNavigate } from "react-router-dom"
 import Footer from "../components/Footer"
-function Basket({ products, basket }) {
+function Basket({product, products, basket }) {
     let nav = useNavigate()
     let total = basket.reduce((acc, item) => acc + products.find((a) => a.id === item.id)?.price * item.count, 0)
     return (
@@ -23,7 +23,7 @@ function Basket({ products, basket }) {
             </div>
            
             <section className='basket-item'>
-                <table>
+               {basket.length? <table>
                     <thead>
                         <tr className='tr-radius'>
                            
@@ -36,16 +36,19 @@ function Basket({ products, basket }) {
                         </tr>
                         </thead>
                         <tbody>
-            {products.length ? basket.map((a) =>
+            {products.length || product.length ? basket.map((a) =>
                 <BasketItem item={a} key={a.id} />
             ) : <h1>Loading...</h1>
             }
                  {total ? <h1 className='total'>Grand Total:${(total).toFixed(2)}</h1> : null}
-                 {!basket.length&&<h1>Basket is empty!</h1>}
+                
           <button className='btn-checkout'>Proceed To Checkout</button>
         
             </tbody>
-               </table>
+               </table>:<div><h1>Basket is empty,Go to  </h1>
+               <NavLink end to="/camplevazimat">Camping Tools</NavLink> 
+               </div>}
+               
               
             </section>
               

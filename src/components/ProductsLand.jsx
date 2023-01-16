@@ -2,15 +2,22 @@ import React, { useState } from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect} from "react"
+import { connect } from 'react-redux';
+import Product from './Product';
 function ProductsLand() {
-    const [products,setProducts]=useState([])
+   const [products,setProducts]=useState([])
     useEffect(() => {
         AOS.init({ duration: 1300 });
     }, [])
 
-   
+ useEffect(()=>{
+fetch('https://fakestoreapi.com/products?limit=4')
+.then((a)=>a.json())
+.then((a)=>setProducts(a))
+ },[])
   return (
     <>
+    
     <section className="our-products">
         <div className="wrapper">
             <div className="products-header">
@@ -20,50 +27,10 @@ function ProductsLand() {
         <div id="line-products"></div>
         </div>
             <div className="products">
-                <div className="product">
-                    <img src="/images/boots.jpeg" alt="" />
-                    <div className="product-sale">Sale!</div>
-                    <div className="product-info">
-                    <h1>Trecking Backpack</h1>
-                    <p>$150$</p>
-                    <button className='btn-transparent'>Add To Cart</button>
-                    </div>
-                   
-
-                </div>
-                <div className="product">
-                    <img src="/images/yellow-tent.jpeg" alt="" />
-                    <div className="product-sale">Sale!</div>
-                    <div className="product-info">
-                    <h1>Trecking Backpack</h1>
-                    <p>$150$</p>
-                    <button className='btn-transparent'>Add To Cart</button>
-                    </div>
-                   
-
-                </div>
-                <div className="product">
-                    <img src="/images/camping-bed.jpeg" alt="" />
-                    <div className="product-sale">Sale!</div>
-                    <div className="product-info">
-                    <h1>Trecking Backpack</h1>
-                    <p>$150$</p>
-                    <button className='btn-transparent'>Add To Cart</button>
-                    </div>
-                   
-
-                </div>
-                <div className="product">
-                    <img src="/images/backpack.jpeg" alt="" />
-                    <div className="product-sale">Sale!</div>
-                    <div className="product-info">
-                    <h1>Trecking Backpack</h1>
-                    <p>$150$</p>
-                    <button className='btn-transparent'>Add To Cart</button>
-                    </div>
-                   
-
-                </div>
+              {products.map((product)=>(
+                <Product key={product.id} item={product}/>
+              ))}
+                
             </div>
         </div>
 
@@ -71,5 +38,5 @@ function ProductsLand() {
     </>
   )
 }
-
-export default ProductsLand
+const t=(a)=>a
+export default connect(t) (ProductsLand)

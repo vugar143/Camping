@@ -11,28 +11,29 @@
   letter-spacing: 2px;
   text-transform: uppercase;
   cursor: pointer;
-  color: white;
-  border: 2px solid white;
+  color: black;
+  border: 2px solid #e3dcd9;
   border-radius: 0;
-  background-color: transparent;
+  background-color: transparent !important;
   width: 120px;
   height: 45px;
   font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   font-size: 13px;
   transition: transform 2s;
-
+  &:hover {
+    background-color: #B67961 !important;
+    cursor: pointer;
+    color: white;
+  }
   @include tablet {
     width: 100px;
     height: 35px;
     font-size: 10px;
   }
+ 
 }
 
-.btn-transparent:hover {
-  background-color: white;
-  cursor: pointer;
-  color: black;
-}
+
 
 .flex-start {
   align-items: flex-start !important;
@@ -52,6 +53,7 @@
   font-weight: 10px;
   z-index: 100;
   cursor: pointer;
+  margin-bottom: 30px;
 }
 
 .btn-brown:hover {
@@ -236,7 +238,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 90vh;
+    height: auto;
     position: absolute;
     top: 80px;
     left: -110%;
@@ -459,6 +461,10 @@ input {
 //   }
 // }
 
+.my-swiper{
+  width: 100%;
+  height: 750px;
+}
 .my-swiper img {
   @include mobile {
     width: 100%;
@@ -689,6 +695,7 @@ input {
 
   .btn-explore {
     margin-top: 30px;
+    margin-bottom: 30px;
     opacity: 1;
   }
 
@@ -701,13 +708,13 @@ input {
   background-size: cover;
   background-position: center;
 
-  // height: 550px;
-  // @include tablet{
-  //   height: 500px;
-  // }
-  // @include mobile{
-  //   height: 500px;
-  // }
+  height: 550px;
+  @include tablet{
+    height: 500px;
+  }
+  @include mobile{
+    height: 500px;
+  }
   &::after {
     position: absolute;
     content: "";
@@ -1188,7 +1195,7 @@ h1 {
 .who-we-are {
   position: relative;
   z-index: 99;
-  height: 80vh;
+  height: 700px;
   margin-top: 50px;
 
   .bg-image-fog {
@@ -1392,7 +1399,7 @@ h1 {
 .why-choose-us {
   position: relative;
   z-index: 99;
-  height: 100vh;
+  height: 800px;
   margin-top: 50px;
 
   .bg-image-map {
@@ -1526,7 +1533,7 @@ h1 {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 60vh;
+  height: 500px;
   background-attachment: fixed;
   display: flex;
   flex-direction: column;
@@ -1676,7 +1683,7 @@ margin-top: 100px;
  background-position: center center;
  background-repeat: no-repeat;
  background-size: cover;
- height: 60vh;
+ height: 500px;
  z-index: 90;
  &::after{
   position: absolute;
@@ -1927,6 +1934,13 @@ margin-top: 100px;
     padding: 15px;
   }
   td{
+    a{
+      color:black;
+      text-decoration: none;
+      &:hover{
+        color: #6caaa8;
+      }
+    }
     .subtotal{
       font-size: 17px;
       text-align: center;
@@ -1934,39 +1948,21 @@ margin-top: 100px;
       
     }
     .remove{
-      padding: 2px 4px;
+      padding: 4px 6px;
         background-color: #ff6f29;
         border: 1px solid #a7a7a7;
         border-radius: 5px;
         cursor: pointer;
         transition: 0.5s;
+        i{
+          font-size: 23px;
+        }
         &:hover{
           background-color: orangered;
           color: white;
         }
     }
-    .operations{
-      gap: 20px;
-      p{
-        border: 1px solid #a7a7a7;
-        padding: 7px 25px;
-        border-radius: 5px;
-
-      }
     
-      button{
-        padding: 4px 9px;
-        background-color: transparent;
-        border: 1px solid #a7a7a7;
-        border-radius: 5px;
-        cursor: pointer;
-        transition: 0.5s;
-        &:hover{
-          background-color: #6caaa8;
-          color: white;
-        }
-      }
-    }
   }
   .total{
     font-size: 17px;
@@ -1989,5 +1985,89 @@ margin-top: 100px;
     color: #6caaa8;
     border: 1px solid #6caaa8;
     
+  }
+}
+
+//Details
+
+.details-layout{
+  height: 100%;
+  .details{
+    padding-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 50px;
+    .details-info{
+      .title{
+        font-size: 50px;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      }
+      .description{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      }
+      .price{
+        font-size: 30px;
+        font-weight:700;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        .colorful-price{
+          color: #6caaa8;
+          text-decoration: underline;
+        }
+      }
+      #details-line{
+        margin-top: 30px;
+    width: 100%;
+    border: 1px solid rgb(222, 189, 189);
+    margin-bottom: 15px;
+    height: 1px;
+    opacity: 0.4;
+      }
+      .details-category{
+        display: flex;
+        gap: 20px;
+        h1{
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          font-size: 20px;
+          font-weight: 800;
+        }
+        p{
+          text-transform: capitalize;
+        }
+      }
+    }
+    .details-image{
+      border: 1px solid #f3f3f3;
+      height: 600px;
+      width: 600px;
+      img{
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+  }
+}
+.operations{
+  justify-content: flex-start !important;
+  gap: 20px;
+  p{
+    margin-top: 10px;
+    border: 1px solid #a7a7a7;
+    padding: 7px 25px;
+    border-radius: 5px;
+
+  }
+
+  button{
+    padding: 7px 10px;
+    background-color: transparent;
+    border: 1px solid #a7a7a7;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s;
+    &:hover{
+      background-color: #6caaa8;
+      color: white;
+    }
   }
 }

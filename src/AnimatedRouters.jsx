@@ -10,6 +10,7 @@ import NotFound from './pages/NotFound'
 import Basket from './pages/Basket'
 import {AnimatePresence, motion} from "framer-motion"
 import WishList from './pages/WishList'
+import Details from './pages/Details'
 function AnimatedRouters() {
   const location=useLocation()
   return (
@@ -61,6 +62,7 @@ function AnimatedRouters() {
     animate={{opacity:1}}
     exit={{opacity:0}}
     ><WishList/></motion.div>}/>
+     <Route path="/details/:id" element={<Details/>} />
    </Routes>
    </AnimatePresence>
    </>
