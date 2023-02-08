@@ -8,7 +8,7 @@ import Reducer from "./store/Reducer"
 const store=legacy_createStore(Reducer)
 import "swiper/css/bundle";
 import "./styles.css";
-
+import './sass/scss.scss'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router>
     <Provider store={store}>
