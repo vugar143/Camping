@@ -3,7 +3,9 @@ import { Button } from 'react-bootstrap'
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-function PopularTours() {
+import { connect } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
+function PopularTours({tours,tour}) {
     useEffect(() => {
         AOS.init({ duration: 1300 });
     }, [])
@@ -23,52 +25,21 @@ function PopularTours() {
                         <div id='dark-line'></div>
                     </div>
                     <div className="carts">
-                        <div className="item" data-aos="fade-left">
-                            
+                        {tours.map((a)=>(
+                            <Link className="item" data-aos="fade-right"  to={`/tour/${a?.id}`}>
                             <div className="cart">
-                                <img src="images/cart.jpeg" alt="" />
+                                <img src={a.main_product_image} alt="" />
                                 <div className="cart-content">
-                                    <h1 className='content-title'>Lakeside camping & activity</h1>
-                                    <p className='content-price'>Start from 149$</p>
+                                    <h1 className='content-title'>{a.name}</h1>
+                                    <p className='content-price'>From $ {a.discount_price}</p>
                                     <Button className='btn-transparent'>Explore</Button>
                                 </div>
                             </div>
-                        </div>
-                        <div className="item" data-aos="fade-left">
-                            <div className="cart">
-                                <img src="images/cart2.webp" alt="" />
-                                <div className="cart-content">
-                                    <h1 className='content-title'>Lakeside camping & activity</h1>
-                                    <p className='content-price'>Start from 149$</p>
-                                    <Button className='btn-transparent'>Explore</Button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="item" data-aos="fade-right">
-                            <div className="cart">
-                                <img src="images/cart3.jpeg" alt="" />
-                                <div className="cart-content">
-                                    <h1 className='content-title'>Lakeside camping & activity</h1>
-                                    <p className='content-price'>Start from 149$</p>
-                                    <Button className='btn-transparent'>Explore</Button>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="item" data-aos="fade-right">
-                            <div className="cart">
-                                <img src="images/cart3.jpeg" alt="" />
-                                <div className="cart-content">
-                                    <h1 className='content-title'>Lakeside camping & activity</h1>
-                                    <p className='content-price'>Start from 149$</p>
-                                    <Button className='btn-transparent'>Explore</Button>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                    <div className="btn-explore df"> <button className='btn-brown df' >Explore More</button>
+                        </Link>
+                  
+                        ))}
+                          </div>
+                    <div className="btn-explore df"> <NavLink end to="/CampErazileri" className='btn-brown df' >Explore More</NavLink>
                     </div>
                 </div>
 
@@ -76,5 +47,5 @@ function PopularTours() {
         </>
     )
 }
-
-export default PopularTours
+const t=(a)=>a
+export default connect(t) (PopularTours)

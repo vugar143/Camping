@@ -14,7 +14,7 @@ const NavLinks = () => {
         
           <div className=" px-3 text-left md:cursor-pointer group ">
             <NavLink  end to={link.linkk}
-              className="navbar-heading  flex justify-between items-center md:pr-0 pr-5 "
+              className="navbar-heading py-7 flex justify-between items-center md:pr-0 pr-5 "
               onClick={() => {
                
                 heading !== link.name ? setHeading(link.name) : setHeading("");
@@ -43,7 +43,7 @@ const NavLinks = () => {
                     ></div>
                   </div>
                   <div className="bg-white p-5 grid grid-cols-3 gap-10">
-                    {link.sublinks.map((mysublinks) => (
+                    {link?.sublinks?.map((mysublinks) => (
                       <div>
                         <Link to={mysublinks.link} className="text-lg font-semibold">
                           {mysublinks.Head}
@@ -75,7 +75,7 @@ const NavLinks = () => {
           `}
           >
             {/* sublinks */}
-            {link.sublinks.map((slinks) => (
+            {link?.sublinks?.map((slinks) => (
               <div>
                 <div>
                   <h1

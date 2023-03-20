@@ -11,7 +11,7 @@ import WhoWeAre from "../components/WhoWeAre"
 import CounterWrapper from "../components/CounterWrapper"
 import WhyChooseUs from '../components/WhyChooseUs'
 import Overlay from '../components/Overlay'
-import Blog from '../components/Blog'
+import Blog from '../components/Blogs'
 import Footer from '../components/Footer'
 function Home() {
   return (

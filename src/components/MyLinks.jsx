@@ -1,12 +1,12 @@
 export const links = [
     {
       linkk:"/zonalar",
-      name: "Zones",
+      name: "Zonalar",
       submenu: true,
       
       sublinks: [
         {
-          Head: "Lenkaran",
+          Head: "Lənkaran",
           link:"/lenkeran",
           image:"https://millidusunce.com/wp-content/uploads/2021/11/Lenkeran-kale....jpg"
          
@@ -17,17 +17,17 @@ export const links = [
           image:"/public/images/quba-mountain.jpg"
         },
         {
-          Head: "Qabala",
+          Head: "Qəbələ",
           link:"/qabala",
           image:"https://hare-media-cdn.tripadvisor.com/media/attractions-splice-spp-720x480/09/9d/a2/78.jpg"
         },
         {
-          Head: "Shaki",
+          Head: "Şəki",
           link:"/shaki",
           image:"https://img.theculturetrip.com/450x/smart/wp-content/uploads/2018/01/sheki_khan_palace_main_faade.jpg"
         },
          {
-          Head: "Qarabag",
+          Head: "Qarabağ",
           link:"/qarabag",
           image:"https://sia.az/storage/2022/02/16/ua.jpg"
         },
@@ -40,7 +40,7 @@ export const links = [
       ],
     },
     {
-      name: "Activities",
+      name: "Aktivitelər",
       linkk:"/camperazileri",
       submenu: true,
       sublinks: [
@@ -69,31 +69,31 @@ export const links = [
       ],
     },
     {
-      name: "Shop",
+      name: "Mağaza",
       linkk:"/camplevazimat",
-      submenu: true,
-      sublinks: [
-        {
-          Head: "Topwear",
+      // submenu: true,
+      // sublinks: [
+      //   {
+      //     Head: "Topwear",
           
-        },
-        {
-          Head: "Bottomwear",
+      //   },
+      //   {
+      //     Head: "Bottomwear",
           
-        },
-        {
-          Head: "innerwear",
+      //   },
+      //   {
+      //     Head: "innerwear",
          
-        },
+      //   },
   
-        {
-          Head: "sleepwear",
+      //   {
+      //     Head: "sleepwear",
           
-        },
-        {
-          Head: "footwear",
+      //   },
+      //   {
+      //     Head: "footwear",
          
-        },
-      ],
+      //   },
+      // ],
     },
   ];

@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import { connect } from "react-redux";
-function Login({ dispatch, tours }) {
+
+function Login({dispatch}) {
   const nav = useNavigate();
   const [user, setUser] = useState({
     username: "nicat",
@@ -10,7 +11,7 @@ function Login({ dispatch, tours }) {
   const [error, setError] = useState("");
   const login = async (e) => {
     e.preventDefault();
-    await fetch("http://127.0.0.1:8000/account/login", {
+    await fetch("http://127.0.0.1:8080/account/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -25,16 +26,20 @@ function Login({ dispatch, tours }) {
         return Promise.reject(a)
       })
       .then((a) => {
+        console.log(a)
         window.localStorage.setItem("access_token", a.tokens?.access);
+        window.localStorage.setItem("user", a?.username);
+        window.localStorage.setItem("user_id", a?.id);
+        console.log(a.username)
         dispatch({
           type: "SET_USER",
-          payload: { ...a.username },
+          payload: a.username,  
         });
         nav("/");
       }
       ).catch(err => {
-        alert('User not found')
-        console.log(err)
+        alert('Username ya da şifrə yanlışdır')
+       
       })
   };
   useEffect(() => {
@@ -44,50 +49,42 @@ function Login({ dispatch, tours }) {
     }
   }, [])
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:8000/tour/tourlist/")
-      .then((a) => a.json())
-      .then((a) => {
-        dispatch({
-          type: "SET_TOURS",
-          payload: a.results,
-
-        })
-      })
-  }, [])
 
   const handleChange = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
   return (
     <>
-      <section className="login-page df">
-        <form onSubmit={login}>
+     
+      <section className="login-page">
+        <div className="auth-form-container">
+        <h2>Login</h2>
+        <form className="login-formm" onSubmit={login}>
+          <label htmlFor="username">Username</label>
           <input
+          className="login-inputt"
             onChange={handleChange}
             type="text"
             placeholder="username"
             name="username"
             value={user.username}
+            id="username"
           />
+           <label htmlFor="password">Password</label>
           <input
+          className="login-inputt"
             onChange={handleChange}
             type="password"
             placeholder="Password"
             name="password"
             value={user.password}
+          id="password"
           />
-          <button>Login</button>
+          <button className="login-button">Login</button>
           {error && <p>{error}</p>}
         </form>
-        <div className="tours">
-          {tours.map((a) => (
-            <>
-              <div>{a.name}</div>
-              <div><img src={a.main_product_image} alt="" /></div>
-            </>
-          ))}
-
+        <button className="link-btn" onClick={() => nav("/register")}>Don't have an account? Register here.</button>
+       
         </div>
       </section>
 

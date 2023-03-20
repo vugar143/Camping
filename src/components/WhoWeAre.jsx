@@ -2,7 +2,9 @@ import React from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import {useEffect} from "react"
+import { useNavigate,NavLink } from 'react-router-dom';
 function WhoWeAre() {
+    const nav=useNavigate()
     useEffect(() => {
         AOS.init({ duration: 1300 });
     }, [])
@@ -26,10 +28,9 @@ function WhoWeAre() {
                             <h1 className='subhead'>
                                 More than an adventure, its a way of life
                             </h1>
-                            <p className='about-text'>Fermentum scelerisque efficitur nostra sociosqu augue elementum litora suscipit dui malesuada. Purus volutpat arcu felis vel libero luctus metus integer.
-                            <br />
-                                Enim scelerisque si leo amet vitae cras penatibus semper ornare commodo vestibulum.</p>
-                            <button className="btn-brown ">Discover More</button>
+                            {/* <p className='about-text'>Fermentum scelerisque efficitur nostra sociosqu augue elementum litora suscipit dui malesuada. Purus volutpat arcu felis vel libero luctus metus integer.
+                           </p> */}
+                           <NavLink className="btn-brown" end to="/elaqe">Explore</NavLink>
                         </div>
                         </div>
                         <div className="item" data-aos="zoom-in">
@@ -46,7 +47,7 @@ function WhoWeAre() {
                                 <div className="widget">
                                     <div className="iconic"><i className="fa-solid fa-quote-left"></i></div>
                                     <p>
-                                        Fill your life with adventures, not things. Have stories to tell not stuff to show.
+                                        Fill your life with adventures.
                                     </p>
                                     <h1>Heidi B. Smith</h1>
                                 </div>

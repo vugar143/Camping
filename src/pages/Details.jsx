@@ -3,20 +3,49 @@ import { useState, useEffect } from "react"
 import { connect } from 'react-redux'
 import { useParams, useNavigate, NavLink } from "react-router-dom"
 import Footer from '../components/Footer'
-import {FaStar} from "react-icons/fa"
+import { FaStar } from "react-icons/fa"
 import { Link } from 'react-router-dom'
-function Details({ product, basket, dispatch }) {
+import StarRatings from 'react-star-ratings';
+function Details({ product, basket, dispatch, user }) {
+    const [mainProductImage, setMainProductImage] = useState(product.main_product_image);
 
+    const handleImageClick = (event, image) => {
+      event.preventDefault();
+      setMainProductImage(image);
+      console.log(111)
+    };
     let { id } = useParams()
-    console.log({id})
+    console.log({ id })
+    const [input, setInput] = useState({
+        content: "",
+        rating: 0,
+        product: id,
+        user: window.localStorage.getItem("user_id"),
+        // blog:blog.name,
+        // user:user.user.username
+    })
+    const initialInputState = {
+        content: "",
+        rating: 0,
+        product: id,
+        user: window.localStorage.getItem("user_id")
+    };
+    const resetInput = () => {
+        setInput(initialInputState);
+        setStar(0)
+    };
+    const handleChange = (e) => {
+        setInput({ ...input, [e.target.name]: e.target.value })
+    }
+
     let nav = useNavigate()
     const [loading, setLoading] = useState(true)
     const [active, setActive] = useState(true)
-    const [star,setStar]=useState(null)
-    const [hover,setHover]=useState(null)
-
+    const [star, setStar] = useState(null)
+    const [hover, setHover] = useState(null)
+    const [comment, setComment] = useState([])
     useEffect(() => {
-        fetch(`https://fakestoreapi.com/products/${id}`)
+        fetch(`http://127.0.0.1:8080/equipment/detail/${id}/`)
             .then((a) => a.json())
             .then((res) => {
                 dispatch({
@@ -26,9 +55,19 @@ function Details({ product, basket, dispatch }) {
                     setLoading(false)
             })
     }, [])
+    useEffect(() => {
+        fetch(`http://127.0.0.1:8080/equipment/detail/${id}/`)
+            .then((a) => a.json())
+            .then((a) => {
+
+                setComment(a.comment)
+            }
+
+            )
+    }, [])
     console.log(product)
     const check = basket?.find((a) => a.id == product?.id)
-    console.log(typeof check)
+    // console.log(typeof check)
     const handleClick = () => {
         if (check) {
             let t = basket?.filter((a) => !a.id == product?.id)
@@ -50,7 +89,7 @@ function Details({ product, basket, dispatch }) {
         })
     }
     const changeCount = (count) => {
-      
+
         let f = basket.find((a) => a.id === +id)
         if (f) {
             f.count += count;
@@ -71,11 +110,27 @@ function Details({ product, basket, dispatch }) {
         })
     }
     let t = basket.find((a) => a.id === product.id)
- 
+
     // const handleUl=(e)=>{
     //     e.target.classList.add("active")
-        
-    // }
+
+    //     // }
+    const handleForm = async (e) => {
+        e.preventDefault();
+        const a = await fetch("http://127.0.0.1:8080/comment/pccreate", {
+            method: "POST",
+            mode: 'cors',
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+            },
+            body: JSON.stringify(input),
+        })
+            .then((a) => a.json())
+            .then((a) => a);
+        window.location.reload();
+    };
+    console.log(comment)
     return (
         <>
 
@@ -94,9 +149,11 @@ function Details({ product, basket, dispatch }) {
                 <div className="wrapper">
                     <div className="details">
                         <div className="details-info">
-                            <h1 className='title'>{product.title}</h1>
+
+                            <h6 className='title'>{product.name}</h6>
+
                             <p className='description'>{product.description}</p>
-                            <h1 className='price'>Price: <span className='colorful-price'>${product.price}</span></h1>
+                            <h1 className='price'>Price: <span className='price-before'>${product.price}</span> <span className='colorful-price'>${product.discount_price}</span></h1>
 
                             <div className='operations df'>
                                 <button className='inc-btn' onClick={() => changeCount(-1)} disabled={!t}>-</button>
@@ -108,84 +165,97 @@ function Details({ product, basket, dispatch }) {
                             <div id='details-line'></div>
                             <ul className='details-category'>
                                 <li><h1>Category</h1></li>
-                                <li><p>{product.category}</p></li>
+                                <li><p>{product.category?.name.slice(0, 20)}...</p></li>
                             </ul>
+
+
                         </div>
-                        <div className="details-image">
-                            <img src={product.image} alt="" />
+                        <div className='details-image'>
+                            <img className='duration-75' src={mainProductImage?mainProductImage:product.main_product_image} alt={product.name} />
+                            <div className='images flex'>
+                           {product?.images?.map(image => (
+                             <div className="image1">
+        <img
+        className='cursor-pointer'
+          key={image.id}
+          src={image.image}
+          alt={product.name}
+          onClick={(event) => handleImageClick(event, image.image)}
+        />
+         </div>
+      ))}
+     
+                           </div>
                         </div>
+                        
+
                     </div>
 
                 </div>
             </section>
-            <div className="review-section">
-                <ul  className="tabs">
-                    <li onClick={() => setActive(true)} className='description-tab'> <Link activeStyle={{ backgroundColor: "blue" }} to="#">Description</Link></li>
-                    <li onClick={() => setActive(false)} oclassName='review'><Link activeStyle={{ backgroundColor: "yellow" }} to="#">Review </Link></li>
-                </ul>
-                {active &&
-                    <div className='description-layout'>
-                        <div className="bg-image">
 
+            <div className="reviews-detailed-blogs">
+                <h1 className='costumer-review'>Musteri deyerlendirmeleri</h1>
+                <hr />
+                {comment.length ? <div className="wrapper">
+
+                    {comment.map((comment) => (
+
+                        <div>
+                            <h1>{user.toUpperCase()}</h1>
+                            <StarRatings
+                                rating={comment.rating}
+                                starRatedColor="orange"
+                                starDimension="20px"
+                                starSpacing="5px"
+                            />
+                            <p>{comment.content}</p>
                         </div>
-                        <div className="wrapper">
-                            <div className="description-text">
-                                <h1>Description</h1>
-                                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Natus, fuga recusandae voluptatibus quasi provident eum aliquid, necessitatibus fugit nihil odit quidem explicabo officiis incidunt temporibus ullam exercitationem perferendis velit doloremque illum, harum dolores doloribus. Ex eos, ad earum incidunt unde voluptas ratione ea libero fuga dolore molestiae perferendis deleniti praesentium?</p>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse ullam omnis eum atque. Dolore, ducimus officia reprehenderit aut est fugit maxime quibusdam natus impedit id animi quo placeat velit consequuntur itaque incidunt adipisci quae beatae qui. Repellendus iure quaerat ipsam odit cum aut nostrum porro, suscipit minima a amet reiciendis.</p>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum porro exercitationem animi expedita a ab ipsam, incidunt praesentium deserunt consectetur dolores odio similique delectus facere culpa. Officiis ipsum tempore quas placeat quo animi cumque quod. Modi dolor debitis fugiat. Iste ad aut obcaecati in. Odio corporis vel totam animi eius?</p>
-                            </div>
-                        </div>
-                    </div>
-                }
-                {!active &&
-                    <div className="description-layout">
-                        <div className="bg-image"></div>
-                        <div className="wrapper">
-                            <div className="description-text">
-                                <h1>Review</h1>
-                                <p>There are no reviews yet.</p>
-                                <p>Be the first to review “Brown Ankle High Men Boots”
-                                    Your email address will not be published. <br /> Required fields are marked *</p>
-                                <p>Your rating *</p>
-                               {[...Array(5)].map((a,i)=>{
-                                const ratingValue=i+1
-                                return(
+
+                    ))}
+
+
+                </div> : <h6 className='text-center'>Komment yoxdur...</h6>}
+
+            </div>
+            <hr />
+            <div className="add-review-blogs">
+                <div className="wrapper">
+                    <h1>Leave a reply</h1>
+                    <form onSubmit={(e) => { handleForm(e), resetInput() }}>
+                        <label htmlFor="comment">Comment</label>
+                        <input className='comment-input' type="text"
+                            name="content"
+                            id='content'
+                            placeholder='Leave your comment'
+                            value={input.content}
+                            onChange={handleChange}
+                        />
+                        <p>Your rating *</p>
+                        <div className="star-layout">
+                            {[...Array(5)].map((a, i) => {
+                                const ratingValue = i + 1
+
+                                return (
+
                                     <>
-                                    <label id="star">
-                                        <input type="radio" onClick={()=>setStar(ratingValue)} name='rating' id='star' value={ratingValue} />
-                                         <FaStar
-                                         onMouseEnter={()=>setHover(ratingValue)}
-                                         onMouseLeave={()=>setHover(null)}
-                                         color={ratingValue<= (star || hover)? "#ffc107":"#e4e5e9"} className='star-icon'/>
+
+                                        <label id="star">
+                                            <input type="radio" onClick={(e) => { setStar(ratingValue), handleChange(e) }} name='rating' id='star' value={ratingValue} />
+                                            <FaStar
+                                                onMouseEnter={() => setHover(ratingValue)}
+                                                onMouseLeave={() => setHover(null)}
+                                                color={ratingValue <= (star || hover) ? "#ffc107" : "#e4e5e9"} className='star-icon' />
                                         </label>
-                                  
-                                   </>
+
+                                    </>
                                 )
-                               })}
-                               {star&&<p>Your Rating is {star}</p>}
-                                
-                                <div className="comment-box">
-                                <label htmlFor="comment"> Your review *
-                                </label>
-                                   <textArea id="comment"></textArea>
-                                </div>
-                                <div className="comment-box">
-                                <label htmlFor="author">Name *</label>
-                                <input type="text" id='author' />
-                                </div>
-                                <div className="comment-box">
-                                <label htmlFor="author">Email *</label>
-                                <input type="text" id='author' />
-                                </div>
-                                <input type="radio" id='save-me' />
-                                <label htmlFor="save-me">Save my name, email, and website in this browser for the next time I comment.</label>
-                                <button className='submit-email'>Submit</button>
-                            </div>
-                            
+                            })}
                         </div>
-                    </div>
-                }
+                        {star && <p>Your Rating is {star}</p>}
+                        <button className='post-comment'>Post your comment</button>
+                    </form>
+                </div>
             </div>
             <Footer />
 

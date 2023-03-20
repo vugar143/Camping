@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { Routes, Route, useLocation } from "react-router-dom"
 import Home from "./pages/Home"
 import Zonalar from './pages/Zonalar'
@@ -9,15 +9,24 @@ import Blog from "./pages/Blog"
 import NotFound from './pages/NotFound'
 import Basket from './pages/Basket'
 import { AnimatePresence, motion } from "framer-motion"
-import WishList from './pages/WishList'
 import Details from './pages/Details'
 import TourDetails from './pages/TourDetails'
 import PrivateRoute from "./components/PrivateRoute";
 import Login from "./pages/Login";
+import { Register } from './pages/Register'
+import BlogDetails from './pages/BlogDetails'
+import BlogPage from './pages/BlogPage'
+import Navbar from './components/Navbar'
+import Fav from './pages/Fav'
+import AboutUs from './pages/AboutUs'
 function AnimatedRouters() {
   const location = useLocation()
+  const isLoginPage = location.pathname === "/login" || location.pathname === "/register";
+
+
   return (
     <>
+     {!isLoginPage && <Navbar />}
       <AnimatePresence mode='wait'>
         <Routes key={location.pathname} location={location}>
           <Route path="/" element={<motion.div
@@ -40,6 +49,12 @@ function AnimatedRouters() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           ><Login /></motion.div>} />
+            <Route path='/register' element={<motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          ><Register /></motion.div>} />
+        
           <Route path='/camperazileri' element={<motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -59,7 +74,7 @@ function AnimatedRouters() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-          ><Blog /></motion.div>} />
+          ><BlogPage /></motion.div>} />
           <Route path="*" element={<motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -70,15 +85,23 @@ function AnimatedRouters() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           ><Basket /></motion.div>} />
-          <Route path='/wishlist' element={<motion.div
+          <Route path='/fav' element={<motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-          ><WishList /></motion.div>} />
-          <Route path="/details/:id" element={<Details />} />
-          <Route path="/tourdetails/:id" element={<TourDetails />} />
+          ><Fav /></motion.div>} />
+          <Route path="/detail/:id" element={<Details />} />
+          <Route path="/tour/:id" element={<TourDetails />} />
+          <Route path="/blogdetails/:id" element={<BlogDetails />} />
+          <Route path='/elaqe' element={<motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          ><AboutUs /></motion.div>} />
+         
         </Routes>
       </AnimatePresence>
+     
     </>
   )
 }

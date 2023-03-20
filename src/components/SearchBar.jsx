@@ -11,7 +11,7 @@ function SearchBar() {
    }
   return (
     <>
-    <section className="searchbar">
+    {/* <section className="searchbar">
         <div className="search-container df">
     <div className='where-input'>
    <div className="icon-location"></div>
@@ -52,7 +52,7 @@ function SearchBar() {
     </div>
    
     </div>
-    </section>
+    </section> */}
     </>
   )
 }

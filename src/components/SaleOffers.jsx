@@ -4,7 +4,9 @@ import 'aos/dist/aos.css';
 import { Button } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useEffect} from 'react'
+import { useNavigate,NavLink } from 'react-router-dom';
 function SaleOffers() {
+    const nav=useNavigate()
     useEffect(() => {
         AOS.init({ duration: 1300 });
     }, [])
@@ -19,7 +21,7 @@ function SaleOffers() {
 <div className="super-sale-info">
     <h1>Super Sale Up To OFF 50%</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
-    <button className="btn-transparent">Shop Now</button>
+    <NavLink end to="/camplevazimat" className='btn-transparent'>Shop Now</NavLink>
 </div>
             </div>
             </div>
@@ -30,7 +32,7 @@ function SaleOffers() {
             
             <h1>Get The Best Deal for Almost <br /> Everything</h1>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
-            <button className='btn-transparent'>Shop Now</button>
+            <NavLink end to="/camplevazimat" className='btn-transparent'>Shop Now</NavLink>
             </div>
 
             </div>

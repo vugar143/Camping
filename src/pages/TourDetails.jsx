@@ -2,31 +2,27 @@ import { connect } from 'react-redux'
 import {useParams,NavLink,Link} from "react-router-dom"
 import React, { useRef, useState,useEffect } from "react";
 import Footer from '../components/Footer';
+import Swal from 'sweetalert2'
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
-
 import "../styles.css";
-
-
-
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper";
-function TourDetails({tour_detail,products,dispatch}) {
+function TourDetails({tour_detail,dispatch}) {
     let { id } = useParams()
-    console.log({id})
     const [loading,setLoading]=useState(true)
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [inputValue,setInputValue]=useState(0)
     const [totalValue,setTotalValue]=useState(0)
     useEffect(()=>{
-        fetch(`https://fakestoreapi.com/products/${id}`)
+        fetch(`http://127.0.0.1:8080/tour/tour/${id}/`)
         .then((a)=>a.json())
         .then((a)=>{
-          
+          console.log(a)
             dispatch({
                 type:"SET_TOUR",
                 payload:a
@@ -34,11 +30,12 @@ function TourDetails({tour_detail,products,dispatch}) {
             setLoading(false)
         })
     },[])
+    console.log(tour_detail)
 const handleInput=(e)=>{
 setInputValue(e.target.value)
 }
 useEffect(()=>{
-    setTotalValue(inputValue * tour_detail.price)
+    setTotalValue(inputValue * tour_detail?.discount_price)
 })
   return (
    <>
@@ -56,19 +53,21 @@ useEffect(()=>{
             <div className="wrapper flex gap-20">
                 <div className="detailed-tour">
                 <div className="detail-title">
-                    <h1>{tour_detail.title}</h1>
+                    <h1>{tour_detail?.name}</h1>
                     <div className="detail-line"></div>
                 </div>
                 <div className="duration-category flex items-center gap-44">
                     <div className="duration">
-                        <h1 className="text-2xl">Duration</h1>
+                        <h1 className="text-2xl text-stone-500">Duration</h1>
+                        <h1 className="text-2xl text-orange-600">{tour_detail?.duration}</h1>
                     </div>
                     <div className="detail-category">
                         <h1 className="text-2xl text-gray-500">Category:</h1>
-                        <h1 className="text-2xl text-orange-600">{tour_detail.category}</h1>
+                        <h1 className="text-2xl text-orange-600">{tour_detail?.type?.name}</h1>
                     </div>
                     <div className="location">
                         <h1 className="text-2xl text-lime-800">Location</h1>
+                        <h1 className="text-2xl text-orange-600">{tour_detail?.category?.name}</h1>
                     </div>
                 </div>
               <div className="swiper-container">
@@ -83,15 +82,15 @@ useEffect(()=>{
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper2 "
       >
-        <SwiperSlide className='w-96'>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
+        {tour_detail?.images?.map((a)=>{
+          console.log(a.image)
+          return(
+            <SwiperSlide className='w-96'>
+            <img src={a.image} />
+          </SwiperSlide>
+          )
+        })}
+       
       
       </Swiper>
       <Swiper
@@ -103,43 +102,21 @@ useEffect(()=>{
         modules={[FreeMode, Navigation, Thumbs]}
         className="mySwiper"
       >
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-        </SwiperSlide>
+        {tour_detail?.images?.map((a)=>{
+          console.log(a.image)
+          return(
+            <SwiperSlide className='w-96'>
+            <img src={a.image} />
+          </SwiperSlide>
+          )
+        })}
       </Swiper>
       </div>
       </div>
             
             <div className="book-tour">
                 <div className="tour-price df">
-                    <h1>Price:${tour_detail.price} </h1>
+                    <h1>Price:${tour_detail?.discount_price} </h1>
                 </div>
                 <div className="book-title df">
                     <h1>Book The Tour</h1>
@@ -158,11 +135,30 @@ useEffect(()=>{
                 <input onChange={handleInput}
                 
                  type="number" />
-                <p>Number ticket  × ${tour_detail.price}</p>
+                <p>Number ticket  × ${tour_detail?.discount_price}</p>
                 </div>
-                <p>Total:{totalValue}</p>
+                <p>Total:${totalValue}</p>
                 <div className="submit-booking df">
-                <button className='btn-green'>Booking Now</button>
+                <button className="btn-green" onClick={()=>{
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "Just one click beyond from your amazing tour",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, I accept it'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                          window.location.reload();
+                          Swal.fire(
+                            'Your request is accepted',
+                            'We will send invoice to your email',
+                            'success'
+                          )
+                        }
+                      })
+                }} >Book Now</button>
                 </div>
                 </div>
                 </div>

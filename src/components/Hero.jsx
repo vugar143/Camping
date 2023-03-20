@@ -25,8 +25,8 @@ export default function App() {
       <Swiper navigation={true} autoplay={true}  modules={[Navigation,Autoplay]} className="mySwiper">
       <div className="aos-continer">
       <div className="aos">
-      <div className="aos-mid" data-aos="fade-right"> <p className="subtitle-slider">Connecting with nature</p> </div>
-      <div className="aos-init" data-aos="fade-up"><h1 className="title-slider" >CHANGE THE <br />WAY YOU THINK</h1></div>
+      <div className="aos-mid" data-aos="fade-right"> <p className="subtitle-slider">Təbiətlə əlaqə qur</p> </div>
+      <div className="aos-init" data-aos="fade-up"><h1 className="title-slider" >Və həyata qarşı <br />Düşüncən dəyişəcək</h1></div>
       </div>
       </div>
       <SearchBar/>

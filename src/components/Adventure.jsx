@@ -3,6 +3,7 @@ import { Button } from 'react-bootstrap'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from "react"
+import { NavLink } from 'react-router-dom';
 
 function Adventure() {
   useEffect(() => {
@@ -26,7 +27,7 @@ function Adventure() {
           <p className='adv-tex'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
 
           </p>
-          <button className="btn-brown ">Discover More</button>
+          <NavLink end to="/camperazileri" className="btn-brown ">Discover More</NavLink>
           </div>
         </div>
       </main>

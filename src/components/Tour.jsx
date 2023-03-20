@@ -6,12 +6,12 @@ function Tour({products,dispatch,tour}) {
   
   return (
    <>
-   <Link className="tour-field" to={`/tourdetails/${tour.id}`}>
+   <Link className="tour-field" to={`/tour/${tour.id}`}>
     <img src={tour.main_product_image} alt="" />
     <div className="tour-sale">Sale!</div>
     <div className="tour-info">
-        <h1>{tour.name}</h1>
-        <p>{tour.price}</p>
+        <h1>{tour.name.slice(0,15)}...</h1>
+        <p> <span className='line-through text-xs'>${tour.price}</span> <span className='text-lg'>${tour.discount_price}</span></p>
     </div>
    </Link>
    </>

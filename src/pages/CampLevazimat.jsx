@@ -1,70 +1,103 @@
-import React from 'react'
-import { useState } from 'react'
+import React from 'react';
+import { useState } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from "react"
+import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Product from '../components/Product';
-import SaleOffers from '../components/SaleOffers'
-import Adventure from '../components/Adventure'
-import WhyChooseUs from '../components/WhyChooseUs'
-import Footer from '../components/Footer'
-import { NavLink } from 'react-router-dom';
-import Details from './Details';
-import FilteredProduct from "../components/FilteredProduct"
-// import Category from '../components/Category';
-function CampLevazimat({ products, dispatch }) {
-  const [search,setSearch]=useState([])
-  // let b=products.filter((a=>a.title.toLowerCase().includes(search)))
-  // console.log(b)
-  const [categories, setCategories] = useState([])
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [categoryy, setCategoryy] = useState("")
-  const [searchedProducts,setSearchProducts]=useState([])
-  
-  const [active, setActive] = useState("")
-  useEffect(() => {
-    AOS.init({ duration: 1300 });
-  }, [])
-  useEffect(() => {
-    fetch('https://fakestoreapi.com/products/categories')
-      .then((a) => a.json())
-      .then((a) => setCategories(a))
-  }, [])
-  console.log(categories)
+import SaleOffers from '../components/SaleOffers';
+import Adventure from '../components/Adventure';
+import WhyChooseUs from '../components/WhyChooseUs';
+import Footer from '../components/Footer';
+import { NavLink, useNavigate } from 'react-router-dom';
 
-  //li-ye click olanda funksiyaya category parametri gelecek ve hemin parametri setcategory ve filterfunctiona oturecek.
-  const handleChange = (category) => {
-    setCategoryy(category);
-    filterFunction(category);
-    // setActive(category)
+function CampLevazimat({ products, dispatch, ptotalPages }) {
+  console.log(ptotalPages)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [displayedPages, setDisplayedPages] = useState([1]);
+  const [categoryId, setCategoryId] = useState('');
+  const [productName, setProductName] = useState('');
+
+  const handleFilter = (event) => {
+    const categoryId = event.target.getAttribute('data-id');
+    setCategoryId(categoryId);
+    dispatch(setBlogsByCategoryId(categoryId));
+  };
+
+  const setBlogsByCategoryId = (categoryId) => {
+    return (dispatch) => {
+      const url = `http://127.0.0.1:8080/equipment/listc/?category=&category__id=${categoryId}&category__name=&name=&description=`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: 'SET_PRODUCTS', payload: data.results }))
+        .catch((error) => console.error(error));
+    };
+  };
+
+  const handleSearch = (e) => {
+    const productName = e.target.value;
+    setProductName(productName);
+    dispatch(setProductsByName(productName));
+  };
+
+  const setProductsByName = (productName) => {
+    return (dispatch) => {
+      const url = `http://127.0.0.1:8080/equipment/listc/?category=&category__id=&category__name=&name=${productName}&description=`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((data) => dispatch({ type: 'SET_PRODUCTS', payload: data.results }))
+        .catch((error) => console.error(error));
+    };
+  };
+  const allProducts = () => {
+    setCategoryId("");
+    setProductName("");
+    dispatch(setProductsByName(""));
+    dispatch(setBlogsByCategoryId(""));
   }
-  
-  console.log(search)
-  //funksiyaya text adli deyer gelecek,ve produclari filtirleyib productun.categorysi text deyerine beraber olanlari saxlayacaq ve
-  //setfilteredproducts adiyla yadda saxlayacaq
-  const filterFunction = (text) => {
-    if (products.length > 1) {
-      const filter = products.filter((product) => product.category === text);
-      setFilteredProducts(filter);
-    }
-    else {
-      console.log('no products to filter')
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
     }
   }
-  const searchFunction=()=>{
-    if(products.length>1){
-      let b=products.filter((a=>a.title.toLowerCase().includes(search)))
-      
+
+  const handleNextPage = () => {
+    if (currentPage < ptotalPages) {
+      setCurrentPage(currentPage + 1);
     }
   }
-  searchFunction()
-     const returntoAllProducts=()=>{
-        setActive('');
-        setCategoryy('');
-        setFilteredProducts([]);
+
+  // Update displayed pages when total pages change
+  useEffect(() => {
+    const pages = [];
+    for (let i = 1; i <= ptotalPages; i++) {
+      pages.push(i);
     }
-  console.log(filteredProducts)
+    setDisplayedPages(pages);
+  }, [ptotalPages]);
+
+  // Calculate the start and end indexes of the products to be displayed on
+
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  }
+
+  // Update displayed pages when total pages change
+  useEffect(() => {
+    const pages = [];
+    for (let i = 1; i <= ptotalPages; i++) {
+      pages.push(i);
+    }
+    setDisplayedPages(pages);
+  }, [ptotalPages]);
+
+  // Calculate the start and end indexes of the products to be displayed on the current page
+  const startIndex = (currentPage - 1) * 4;
+  const endIndex = startIndex + 4;
+  const productsToDisplay = products.slice(startIndex, endIndex);
+  console.log(productsToDisplay)
+  console.log(products)
   return (
     <>
       <div className='basket-image'>
@@ -79,64 +112,69 @@ function CampLevazimat({ products, dispatch }) {
 
       </div>
       <SaleOffers />
-      <section className="category-products">
+      <section className="category-products flex">
         <div className="wrapper">
           <div className="category-search">
             <div className="search-button df">
-              <input value={search} onInput={(e)=>setSearch(e.target.value)} type="text" placeholder='Search products' />
+              <input value={productName} onChange={handleSearch} type="text" placeholder='Search Products...' />
               <button className="search-icon df"><i className="fa-solid fa-magnifying-glass"></i></button>
             </div>
             <div className="category-of-products">
               <div className="heading-category">
-                <h1>Categories</h1>
+                <h1>Category</h1>
+                <ul className='categories-ul'>
+                  {products.map((product) => {
+                    console.log(product); // add this line to inspect the blogg objects
+                    return (
+                      <>
+                        <li data-id={product.category.id ? product.category.id.toString() : ""} onClick={handleFilter}>
+                          <i class="fa-solid fa-arrow-right"></i>
+                          {product.category.name}
+                        </li>
+                        <div id="category-line"></div>
+                      </>
+                    );
+                  })}
+                  <button onClick={allProducts}>Return to All Products</button>
+                </ul>
               </div>
-              <ul className='categories-ul'>
-                {categories.map((category, index) => (<>
-                  <li  key={index} category={category}
-                    onClick={() => handleChange(category)}
-                    className={category === active ? active : "deactive"}
-                  ><i class="fa-solid fa-arrow-right"></i>{category}</li>
-                  <div id="category-line"></div>
-                  </>
-                ))}
-              </ul>
             </div>
           </div>
-          {filteredProducts.length > 0 && (
-            <div className='products-box'>
+          <div className='products-box'>
             <div className="products-container">
-            <h1>{categoryy}</h1>
-            <div id="line-products"></div>
-            </div>
-              <a href="javascript:void(0)" onClick={returntoAllProducts}>Return to All Products</a>
-              <div className='products'>
-                {filteredProducts.map((a)=>(
-                  <FilteredProduct key={a.id} item={a}/>
-                ))}
-              </div>
-            </div>
-          )}
-          {filteredProducts.length < 1 && (
-            <div className='products-box'>
-              <div className="products-container">
               <h1>All Products</h1>
               <div id="line-products"></div>
-              </div>
-              <div className="products">
-              {products.map((product) => (
+            </div>
+            <div className="products">
+              {productsToDisplay.map((product) => (
                 <Product key={product.id} item={product} />
 
               ))}
-              </div>
-             
             </div>
-          )}
-          {products.length<1&&(
+
+          </div>
+
+          {products.length < 1 && (
             <h1>Please wait...</h1>
           )}
-
+ 
         </div>
+      
       </section>
+      <div className="pagination flex gap-10">
+            <button onClick={handlePreviousPage} className="prev">Evvelki</button>
+            {displayedPages.map((page) => (
+              <button
+                id='page'
+                key={page}
+                onClick={() => handlePageClick(page)}
+                className={page === currentPage ? 'active' : ''}
+              >
+                {page}
+              </button>
+            ))}
+            <button onClick={handleNextPage} className="next">Sonraki</button>
+          </div>
       <Adventure />
       <WhyChooseUs />
       <Footer />

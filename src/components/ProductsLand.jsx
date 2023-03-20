@@ -4,17 +4,12 @@ import 'aos/dist/aos.css';
 import {useEffect} from "react"
 import { connect } from 'react-redux';
 import Product from './Product';
-function ProductsLand() {
-   const [products,setProducts]=useState([])
+function ProductsLand({products}) {
     useEffect(() => {
         AOS.init({ duration: 1300 });
     }, [])
 
- useEffect(()=>{
-fetch('https://fakestoreapi.com/products?limit=4')
-.then((a)=>a.json())
-.then((a)=>setProducts(a))
- },[])
+
   return (
     <>
     
