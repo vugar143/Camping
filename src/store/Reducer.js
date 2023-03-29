@@ -1,7 +1,7 @@
 const initialState = {
     modalShow: false,
     products: [],
-    basket: [],
+    basket:JSON.parse(window.localStorage.getItem("basket"))?JSON.parse(window.localStorage.getItem("basket")) : [],
     wishlist: [],
     product: {},
     tour_detail: {},
@@ -35,13 +35,13 @@ export default function Reducer(state = initialState, action) {
         case "SET_TOUR":
             return { ...state, tour_detail: action.payload }
         case "SET_BASKET":
-            // localStorage.setItem("basket", JSON.stringify(action.payload))
+            localStorage.setItem("basket", JSON.stringify(action.payload))
             return { ...state, basket: action.payload }
 
         case "SET_WISHLIST":
             return { ...state, wishlist: action.payload }
         case "REMOVE_BASKET":
-            // localStorage.setItem("basket", JSON.stringify([...state.basket.filter((a) => a.id !== action.payload)]))
+            localStorage.setItem("basket", JSON.stringify([...state.basket.filter((a) => a.id !== action.payload)]))
             return {
                 ...state,
                 basket: [...state.basket.filter((a) => a.id !== action.payload)]

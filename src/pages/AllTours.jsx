@@ -13,23 +13,21 @@ function CampErazileri({ tours, dispatch,totalPagess}) {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 const [displayedPages, setDisplayedPages] = useState([1]);
-const [filteredTours,setFilteredTours]=useState([])
 console.log(tours)
   const handleEventType = (e) => {
     console.log("Selected event type: ", e.target.value);
     setEventType(prevEventType => e.target.value);
   }
-
+  tours.filter((a)=>{
+   let b=a.type.name
+   console.log(b)
+  })
+ console.log(tours)
   const handleEventCategory = (e) => {
 
     setEventCategory(e.target.value);
 
   }
-  useEffect(()=>{
-    let dynamicType=tours.filter((a)=>a.type.name==tour_type_name.tour_type_name)
-    setFilteredTours(dynamicType)
-  },[tour_type_name])
-  console.log(filteredTours)
   // Update displayed pages when total pages change
 useEffect(() => {
   const pages = [];
@@ -138,16 +136,57 @@ if(currentPage<totalPagess){
           <div className="tours-box flex w-full ">
             <div className="search-tours flex justify-center w-72 bg-cyan-600">
               <div className="title-search pt-3">
-                <h1 className="text-center font-sans text-white">Aktivitenin növü</h1>
-                <p className="text-center text-lg font-sans text-white">{tour_type_name.tour_type_name}</p>
+                <h1 className="text-center font-sans text-white">Search Tour</h1>
+                <p className="text-center font-sans text-white">Find your dream tour today!</p>
               </div>
-           <h1></h1>
-           <p></p>
+              <form
+                className="form-search"
+                onSubmit={handleSubmit}
+              >
+                <div className="form-inputs">
+                <input value={tourName} onChange={searchName} className='' type="text" placeholder='Turun adi...' />
+                {tours?.length > 0 && (
+                  <select
+                    value={eventType}
+                    onChange={handleEventType}
+                    className='select-type'
+                    name="areas"
+                    id="areas"
+                  >
+                    <option value="">-- Aktiviteni seçin --</option>
+                    {tours.map((c) => (
+                      <option key={c.type.id} value={c.type.id}>{c.type.name}</option>
+                    ))}
+                  </select>
+                )}
+                {tours?.length > 0 && (
+                  <select
+                    value={eventCategory}
+                    onChange={handleEventCategory}
+                    className='select-type'
+                    name="areas"
+                    id="areas"
+                  >
+                    <option value="">-- Zonani seçin --</option>
+                    {tours.map((c) => (
+                      <option key={c.type.id} value={c.category.id}>{c.category.name}</option>
+                    ))}
+                  </select>
+                )}
+                <input
+                  type="month"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                />
+                <button className='btn-brown'>Find Tours</button>
+                <button type="button" className='btn-brown' onClick={handleReset}>Reset</button>
+                </div>
+              </form>
             </div>
             <div className="tours-container">
               {tours.length > 0 ? (
                 <div className="tours">
-                  {filteredTours.map((a) => (
+                  {tours.map((a) => (
                     <Tour key={a.id} tour={a} />
                   ))}
                 </div>

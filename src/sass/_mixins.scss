@@ -24,7 +24,7 @@
     }
 }
 @mixin mini-device {
-    @media (max-width: #{double-extra-small-device}) {
+    @media (max-width: #{$double-extra-small-device}) {
         @content;
     }
 }

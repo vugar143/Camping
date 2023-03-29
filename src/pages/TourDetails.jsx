@@ -10,19 +10,69 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "../styles.css";
+import { FaStar } from "react-icons/fa"
+import StarRatings from 'react-star-ratings';
 // import required modules
 import { FreeMode, Navigation, Thumbs } from "swiper";
-function TourDetails({tour_detail,dispatch}) {
+function TourDetails({tour_detail,dispatch,user}) {
     let { id } = useParams()
     const [loading,setLoading]=useState(true)
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [inputValue,setInputValue]=useState(0)
     const [totalValue,setTotalValue]=useState(0)
+    const [star, setStar] = useState(null)
+    const [hover, setHover] = useState(null)
+    const [comment, setComment] = useState([])
+    const [input, setInput] = useState({
+      content: "",
+      rating: 0,
+      tour: id,
+      user: window.localStorage.getItem("user_id"),
+  })
+  const initialInputState = {
+    content: "",
+    rating: 0,
+    tour: id,
+    user: window.localStorage.getItem("user_id")
+};
+const resetInput = () => {
+  setInput(initialInputState);
+  setStar(0)
+};
+const handleChange = (e) => {
+  setInput({ ...input, [e.target.name]: e.target.value })
+}
+useEffect(() => {
+  fetch(`http://127.0.0.1:8080/tour/tour/${id}/`)
+      .then((a) => a.json())
+      .then((a) => {
+        console.log(a.comment)
+        console.log(a)
+          setComment(a.comment)
+      }
+
+      )
+}, [])
+const handleForm = async (e) => {
+  e.preventDefault();
+  const a = await fetch("http://127.0.0.1:8080/comment/tccreate", {
+      method: "POST",
+      mode: 'cors',
+      headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+      },
+      body: JSON.stringify(input),
+  })
+      .then((a) => a.json())
+      .then((a) => a);
+ 
+};
+
     useEffect(()=>{
         fetch(`http://127.0.0.1:8080/tour/tour/${id}/`)
         .then((a)=>a.json())
         .then((a)=>{
-          console.log(a)
             dispatch({
                 type:"SET_TOUR",
                 payload:a
@@ -30,7 +80,6 @@ function TourDetails({tour_detail,dispatch}) {
             setLoading(false)
         })
     },[])
-    console.log(tour_detail)
 const handleInput=(e)=>{
 setInputValue(e.target.value)
 }
@@ -83,7 +132,7 @@ useEffect(()=>{
         className="mySwiper2 "
       >
         {tour_detail?.images?.map((a)=>{
-          console.log(a.image)
+        
           return(
             <SwiperSlide className='w-96'>
             <img src={a.image} />
@@ -103,7 +152,7 @@ useEffect(()=>{
         className="mySwiper"
       >
         {tour_detail?.images?.map((a)=>{
-          console.log(a.image)
+      
           return(
             <SwiperSlide className='w-96'>
             <img src={a.image} />
@@ -167,10 +216,73 @@ useEffect(()=>{
             </section>
             <section className="description-tours">
                 <div className="wrapper">
-              
+            <p>{tour_detail.description}</p>
                 </div>
             </section>
            
+            <div className="reviews-detailed-blogs">
+                <h1 className='costumer-review'>Musteri deyerlendirmeleri</h1>
+                <hr />
+                {comment?.length ? <div className="wrapper">
+
+                    {comment?.map((comment) => (
+
+                        <div>
+                            <h1>{user.toUpperCase()}</h1>
+                            <StarRatings
+                                rating={comment.rating}
+                                starRatedColor="orange"
+                                starDimension="20px"
+                                starSpacing="5px"
+                            />
+                            <p>{comment.content}</p>
+                        </div>
+
+                    ))}
+
+
+                </div> : <h6 className='text-center'>Komment yoxdur...</h6>}
+
+            </div>
+            <hr />
+            <div className="add-review-blogs">
+                <div className="wrapper">
+                    <h1>Leave a reply</h1>
+                    <form onSubmit={(e) => { handleForm(e), resetInput() }}>
+                        <label htmlFor="comment">Comment</label>
+                        <input className='comment-input' type="text"
+                            name="content"
+                            id='content'
+                            placeholder='Leave your comment'
+                            value={input.content}
+                            onChange={handleChange}
+                        />
+                        <p>Your rating *</p>
+                        <div className="star-layout">
+                            {[...Array(5)].map((a, i) => {
+                                const ratingValue = i + 1
+
+                                return (
+
+                                    <>
+
+                                        <label id="star">
+                                            <input type="radio" onClick={(e) => { setStar(ratingValue), handleChange(e) }} name='rating' id='star' value={ratingValue} />
+                                            <FaStar
+                                                onMouseEnter={() => setHover(ratingValue)}
+                                                onMouseLeave={() => setHover(null)}
+                                                color={ratingValue <= (star || hover) ? "#ffc107" : "#e4e5e9"} className='star-icon' />
+                                        </label>
+
+                                    </>
+                                )
+                            })}
+                        </div>
+                        {star && <p>Your Rating is {star}</p>}
+                        <button className='post-comment'>Post your comment</button>
+                    </form>
+                </div>
+            </div>
 <Footer/>
    </>
   )

@@ -43,8 +43,14 @@ function BasketItem({ products, item, basket, dispatch }) {
         <>
             <tr>
             
-                <td className='product-image'><Link className="product" to={`/details/${item.id}`}> <img src={product.main_product_image} alt="" /></Link></td>
-                <td><Link className="product" to={`/details/${item.id}`}>{product?.title?.slice(0, 16)}...</Link></td>
+                <td className='product-image'>
+                    <Link className="productt" to={`/detail/${item.id}`}>
+                    <img src={product.main_product_image} alt="" />
+                         </Link>
+                  
+                    </td>
+                <td><Link className="product" to={`/detail/${item.id}`}>{product?.name?.slice(0, 16)}...</Link></td>
+               
                 <td>${product.price}</td>
                 <td> <div className="operations df">
                     <button onClick={decrease} className='dec-btn'>-</button>

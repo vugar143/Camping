@@ -7,6 +7,7 @@ import Footer from "../components/Footer"
 function Basket({ product, products, basket }) {
     let nav = useNavigate()
     let total = basket.reduce((acc, item) => acc + products.find((a) => a.id === item.id)?.price * item.count, 0)
+   
     return (
         <>
 

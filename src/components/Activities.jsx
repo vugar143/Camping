@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 function Activities() {
   return (
@@ -12,9 +13,9 @@ function Activities() {
             <h1 className='second-text'>Our Activities</h1>
         </div>
         <div className="act-boxes">
-            <div className="act-box1">
+            <NavLink to="type/Kamping" className="act-box1">
                 <div className="box-img">
-                <img  src="/images/greens-bag-guy.jpeg" alt="" />
+                <img  src="/images/cart2.webp" alt="" />
                 </div>
                 <div className="absolute">
                 <img className='bg-image' src="/images/bg-splash-white.png" alt="" 
@@ -28,14 +29,14 @@ function Activities() {
                     <p className='act-description'>There are not many of passages of lorem ipsum available alteration in osten 
                         some form.
                     </p>
-                    <a className='read-more' href="/">Read More <i className="fa-sharp fa-solid fa-arrow-right"></i></a>
+                    <NavLink className='read-more' to="/type/Kamping">Read More <i className="fa-sharp fa-solid fa-arrow-right"></i></NavLink>
                     
                 </div>
                 
-            </div>
-            <div className="act-box1">
+            </NavLink>
+            <NavLink to="type/Hiking" className="act-box1">
                 <div className="box-img">
-                <img  src="/images/waterfall-couple.jpeg" alt="" />
+                <img  src="/images/greens-bag-guy.jpeg" alt="" />
                 </div>
                 <div className="absolute">
                 <img className='bg-image' src="/images/bg-splash-white.png" alt="" 
@@ -45,16 +46,16 @@ function Activities() {
                  <i className="fa-solid fa-parachute-box"></i>
                 </div>
                 <div className="box-info">
-                    <h1 className='second-text'>Adventure</h1>
+                    <h1 className='second-text'>Hiking</h1>
                     <p className='act-description'>Sed laoreet vitae justo non feugiat. Mauris faucibus ligula quis vulputate vestibulum volutpat.
                     </p>
-                    <a className='read-more' href="/">Read More <i className="fa-sharp fa-solid fa-arrow-right"></i></a>
+                    <NavLink to="type/Hiking" className='read-more' href="/">Read More <i className="fa-sharp fa-solid fa-arrow-right"></i></NavLink>
                 </div>
                 
-            </div>
-            <div className="act-box1">
+            </NavLink>
+            <NavLink to="type/Yoga" className="act-box1">
                 <div className="box-img">
-                <img  src="/images/canoe.jpeg" alt="" />
+                <img  src="/images/ismayil-3.jpeg" alt="" />
                 </div>
                 <div className="absolute">
                 <img className='bg-image' src="/images/bg-splash-white.png" alt="" 
@@ -64,14 +65,14 @@ function Activities() {
                  <i className="fa-solid fa-sailboat"></i>
                 </div>
                 <div className="box-info">
-                    <h1 className='second-text'>Canoe</h1>
+                    <h1 className='second-text'>Yoga</h1>
                     <p className='act-description'>There are not many of passages of lorem ipsum available alteration in osten 
                         some form.
                     </p>
-                    <a className='read-more' href="/">Read More <i className="fa-sharp fa-solid fa-arrow-right"></i></a>
+                    <NavLink to="type/Yoga" className='read-more' href="/">Read More <i className="fa-sharp fa-solid fa-arrow-right"></i></NavLink>
                 </div>
                 
-            </div>
+            </NavLink>
        
         </div>
     </div>

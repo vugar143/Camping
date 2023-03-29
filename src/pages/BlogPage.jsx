@@ -3,6 +3,7 @@ import { useState,useEffect } from 'react'
 import { connect } from 'react-redux'
 import { NavLink, Link,useNavigate} from 'react-router-dom'
 import Footer from '../components/Footer'
+import SaleOffers from '../components/SaleOffers'
 function BlogPage({ blogs,dispatch }) {
     const nav=useNavigate()
     const [categoryId, setCategoryId] = useState('');
@@ -61,7 +62,7 @@ function BlogPage({ blogs,dispatch }) {
 
             </div>
 
-            <section className='mb-60' >
+            <section className='' >
                 <div className="wrapper flex">
                     <div className="blog-section">
                         {blogs.map((blog) => (
@@ -72,7 +73,7 @@ function BlogPage({ blogs,dispatch }) {
                                     <div className='blog-qutu'>
                                         <img src={blog.image} alt="" />
                                         <h1>{blog.name}</h1>
-                                        <p>{blog.description}</p>
+                                        <p>{blog.description.slice(0,150)}... .</p>
                                     </div>
 
                                 </div>
@@ -103,9 +104,34 @@ function BlogPage({ blogs,dispatch }) {
                             })}
   <button onClick={allProducts}>Return To All Products.</button>
                         </ul>
-                      
-                    </div>
+                        <div className="item" >
+            <div className="super-sale mt-12">
+<img src="/images/shop-boots.jpeg" alt="" />
+<div className="super-sale-info border">
+    <h1 className="text-base" >Super Sale Up To OFF 50%</h1>
+    <p className=''>Lorem ipsum dolor sit amet consectetur adipiscing elit dolor</p>
+    <NavLink end to="/camplevazimat" className='btn-transparent'>Shop Now</NavLink>
+</div>
+            </div>
+            </div>
+            <div className='hiking-coach'>
+            <div className="artis">
+                <div
+                  className="artistimg"
+                  
+                >
+                  <img src="https://cdn.bolvo.com/assets/viasun/team-item-3.jpg" />
                 </div>
+                <div className="artisttext">
+                  <h1>Hiking Coach</h1>
+                  <p>Nunc class nec habitasse vel nullam at tempus. Semper eget placerat dictum egestas ut tempus aenean cras lectus mollis.</p>
+                </div>
+              </div>
+              </div>
+                    </div>
+                   
+                </div>
+                
             </section>
             <Footer />
         </>

@@ -6,12 +6,15 @@ import React, { useState,useEffect } from "react";
 import NavLinks from "./NavLinks";
 import LoginModal from "./LoginModal"; 
 import {IonIcon} from "react-ion-icon";
-const Navbar = ({location,basket,user,dispatch,fav}) => {
+const Navbar = ({location,basket,user,dispatch,fav,products}) => {
+
   const {pathname}=useLocation()
   const nav=useNavigate()
   const [open, setOpen] = useState(false);
   const [modal,setModal]=useState(false)
   const [userName,setUserName]=useState("")
+  const [categoryId, setCategoryId] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const handleModal=()=>{
     setModal(!modal)
   }
@@ -42,6 +45,29 @@ const logOutFunc=()=>{
 if (pathname === '/login' || pathname==='/register') {
   return null; // render nothing if current route is '/login'
 }
+
+const setProductsByCategoryId = (categoryId) => {
+  return (dispatch) => {
+      const url = `http://127.0.0.1:8080/equipment/listc/?category=&category__id=${categoryId}&category__name=&name=&description=`;
+      fetch(url)
+          .then((response) => response.json())
+          .then((data) => dispatch({ type: 'SET_PRODUCTS', payload: data.results }))
+          .catch((error) => console.error(error));
+  };
+};
+const handleFilter = (event) => {
+  const categoryId = event.target.getAttribute('data-id');
+  dispatch(setProductsByCategoryId(categoryId));
+};
+// const filteredProducts = products.filter(product => {
+//   return selectedCategory === '' || product.category.id === selectedCategory;
+// });
+const handleCategoryClick = (event, category) => {
+  event.preventDefault();
+  setSelectedCategory(category);
+
+};
+const filteredProducts = pathname === '/products' ? products : [];
   return  (
     <nav className="header-section bg-amber-100">
     <LoginModal/>
@@ -58,14 +84,32 @@ if (pathname === '/login' || pathname==='/register') {
       
       <ul className="nav-ul md:flex hidden uppercase items-center gap-8 font-[Poppins]">
         <li>
-          <Link to="/" className="py-3 px-3 inline-block">
+          <Link to="/" className="mynavbarli py-3 px-3 inline-block">
             Ana Səhifə
           </Link>
         </li>
         <NavLinks />
         {/* <li>  <Link end to="/xidmetler">Services</Link></li> */}
-        <li>  <Link end to="/blog">Blog</Link></li>
-        <li>  <Link end to="/elaqe">Haqqımızda</Link></li>
+        {/* <li class="dropdown">
+      <a href="#">Products</a>
+      <ul className="dropdown-menu">
+            {products.map((product) => (
+              <li key={product.category.id}>
+                <a
+                  className={selectedCategory === product.category.id ? 'dropdown-item active' : 'dropdown-item'}
+                  onClick={() => handleCategoryClick(product.category.id)}
+                  href="#"
+                >
+                  {product.category.name}
+                </a>
+              </li>
+            ))}
+          </ul>
+    </li> */}
+      
+        
+        <li>  <Link className="mynavbarli" end to="/blog">Blog</Link></li>
+        <li>  <Link className="mynavbarli" end to="/elaqe">Haqqımızda</Link></li>
        
        <li>
         {user? <h6 className="text-white text-base font-bold m-4">{user.toUpperCase()}</h6>:<i

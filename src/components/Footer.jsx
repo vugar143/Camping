@@ -34,9 +34,10 @@ function Footer() {
                         </ul>
                     </li>
                 </ul>
-               
+                </div>
+                <div className="contacts ">
                 <ul className='costumer-service'>
-                    <li>Costumer Service</li>
+                    <li>Costumer Service <span id='footer-line'></span></li>
                     <li><a href="">My Account</a></li>
                     <li><a href="">Order History</a></li>
                     <li><a href="">Newsletter</a></li>

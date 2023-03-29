@@ -3,18 +3,19 @@ import { Link,NavLink } from "react-router-dom";
 import { links } from "./Mylinks";
 import AnimatedRouters from "../AnimatedRouters";
 
-const NavLinks = () => {
+const NavLinks = ({products}) => {
   const [heading, setHeading] = useState("");
   const [subHeading, setSubHeading] = useState("");
+  
   return (
     <>
       {links.map((link) => (
-       
+      
         <div>
         
           <div className=" px-3 text-left md:cursor-pointer group ">
             <NavLink  end to={link.linkk}
-              className="navbar-heading py-7 flex justify-between items-center md:pr-0 pr-5 "
+              className="navbar-heading py-7 flex justify-between items-center md:pr-0 pr-5 mynavbarli "
               onClick={() => {
                
                 heading !== link.name ? setHeading(link.name) : setHeading("");
@@ -43,15 +44,16 @@ const NavLinks = () => {
                     ></div>
                   </div>
                   <div className="bg-white p-5 grid grid-cols-3 gap-10">
+                   
                     {link?.sublinks?.map((mysublinks) => (
                       <div>
-                        <Link to={mysublinks.link} className="text-lg font-semibold">
+                        <Link to={mysublinks.link} className="text-lg font-semibold sublinksli">
                           {mysublinks.Head}
                           {mysublinks.image&&  <img src={mysublinks.image} className="w-16 h-14" alt="" />}
                         
                         </Link>
-                       
-                        {mysublinks.sublink?.map((slink) => (
+                  
+                        {/* {mysublinks.sublink?.map((slink) => (
                           <li className="text-sm text-gray-600 my-2.5">
                             <Link
                               to={slink.link}
@@ -60,7 +62,7 @@ const NavLinks = () => {
                               {slink.name}
                             </Link>
                           </li>
-                        ))}
+                        ))} */}
                       </div>
                     ))}
                   </div>
@@ -78,7 +80,7 @@ const NavLinks = () => {
             {link?.sublinks?.map((slinks) => (
               <div>
                 <div>
-                  <h1
+                  <NavLink to={slinks.link}
                     onClick={() =>
                       subHeading !== slinks.Head
                         ? setSubHeading(slinks.Head)
@@ -97,7 +99,7 @@ const NavLinks = () => {
                         }`}
                       ></ion-icon>
                     </span>
-                  </h1>
+                  </NavLink>
                   <div
                     className={`${
                       subHeading === slinks.Head ? "md:hidden" : "hidden"

@@ -35,13 +35,13 @@ function WhyChooseUs() {
                                         <p className='subtitle'>In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
                                     </div>
                                 </div>
-                                <div className="icon-box-wrapper">
+                                {/* <div className="icon-box-wrapper">
                                     <span><i className="fa-solid fa-check"></i></span>
                                     <div className="icon-box-content">
                                         <h1 className='icon-box-title'>Professional Expert</h1>
                                         <p className='subtitle'>In sollicitudin metus fames lacus rutrum eget. Pede consectetur in pharetra massa orci.</p>
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         </div>

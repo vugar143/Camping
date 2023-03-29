@@ -19,6 +19,8 @@ import BlogPage from './pages/BlogPage'
 import Navbar from './components/Navbar'
 import Fav from './pages/Fav'
 import AboutUs from './pages/AboutUs'
+import AllProducts from './pages/AllProducts'
+import AllTours from './pages/AllTours'
 function AnimatedRouters() {
   const location = useLocation()
   const isLoginPage = location.pathname === "/login" || location.pathname === "/register";
@@ -55,16 +57,18 @@ function AnimatedRouters() {
             exit={{ opacity: 0 }}
           ><Register /></motion.div>} />
         
-          <Route path='/camperazileri' element={<motion.div
+          <Route path='/type/:tour_type_name' element={<motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           ><CampErazileri /></motion.div>} />
-          <Route path='/camplevazimat' element={<motion.div
+           <Route path='/alltours' element={<AllTours></AllTours>}/>
+          <Route path='/category/:category_name' element={<motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           ><CampLevazimat /></motion.div>} />
+          <Route path='/all' element={<AllProducts></AllProducts>}/>
           <Route path='/xidmetler' element={<motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}

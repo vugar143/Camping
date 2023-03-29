@@ -13,7 +13,7 @@ function Overlay() {
             </div>
             <h1 className='head-title'>Camp with your friends, build some memories</h1>
             <p className='subhead-title'>Lacinia bibendum curae maximus molestie tempor urna. Proin augue efficitur fermentum gravida duis pretium integer consectetur est ac sodales.</p>
-            <NavLink end to="/camperazileri" className='btn-br'>Discover More</NavLink>
+            <NavLink end to="/alltours" className='btn-br'>Discover More</NavLink>
         </div>
         </div>
     </main>

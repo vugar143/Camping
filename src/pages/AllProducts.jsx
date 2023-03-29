@@ -129,7 +129,7 @@ console.log(filteredProducts)
             <div className="category-of-products">
               <div className="heading-category">
                 <h1>Category</h1>
-                {/* <ul className='categories-ul'>
+                <ul className='categories-ul'>
                   {products.map((product) => {
                     console.log(product); // add this line to inspect the blogg objects
                     return (
@@ -143,7 +143,7 @@ console.log(filteredProducts)
                     );
                   })}
                   <button onClick={allProducts}>Return to All Products</button>
-                </ul> */}
+                </ul>
                 <p>{category_name.category_name}</p>
               </div>
             </div>
@@ -153,17 +153,17 @@ console.log(filteredProducts)
               <h1>All Products</h1>
               <div id="line-products"></div>
             </div>
-            {/* <div className="products">
+            <div className="products">
               {productsToDisplay.map((product) => (
                 <Product key={product.id} item={product} />
 
               ))}
-            </div> */}
-            <div className='products'>
+            </div>
+            {/* <div className='products'>
               {filteredProducts.map((a)=>(
                 <Product key={a.id} item={a} />
               ))}
-            </div>
+            </div> */}
 
           </div>
 

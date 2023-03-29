@@ -12,7 +12,7 @@ function Details({ product, basket, dispatch, user }) {
     const handleImageClick = (event, image) => {
       event.preventDefault();
       setMainProductImage(image);
-      console.log(111)
+     
     };
     let { id } = useParams()
     console.log({ id })
@@ -21,8 +21,6 @@ function Details({ product, basket, dispatch, user }) {
         rating: 0,
         product: id,
         user: window.localStorage.getItem("user_id"),
-        // blog:blog.name,
-        // user:user.user.username
     })
     const initialInputState = {
         content: "",
@@ -59,7 +57,8 @@ function Details({ product, basket, dispatch, user }) {
         fetch(`http://127.0.0.1:8080/equipment/detail/${id}/`)
             .then((a) => a.json())
             .then((a) => {
-
+                console.log(a.comment)
+              
                 setComment(a.comment)
             }
 
