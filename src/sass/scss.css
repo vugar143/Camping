@@ -3538,38 +3538,13 @@ label {
   width: 240px;
 }
 
-.dropdown {
-  position: relative;
-}
-
-.dropdown-menu {
-  position: absolute;
-  z-index: 1;
-  background-color: #f9f9f9;
-  display: none;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-menu a {
-  color: #333;
-  cursor: pointer;
-  padding: 10px;
-  text-decoration: none;
-  display: block;
-}
-
-.dropdown-menu a:hover {
-  background-color: #ddd;
-}
-
 .mynavbarli {
   color: #eb5b32;
   text-decoration: none;
   transition: color 0.3s ease-in-out;
   font-family: var(--lucida);
+  font-size: 15px;
+  font-weight: 600;
   animation: slideInLeft 0.5s ease forwards;
 }
 .mynavbarli:hover {
@@ -3601,10 +3576,24 @@ label {
   color: #000;
 }
 
-.nav-links {
+.ket {
+  position: relative;
+}
+.ket .icons {
   font-size: 20px;
   color: #B67961;
+  transition: 0.2s linear;
 }
-.nav-links:hover {
+.ket .icons:hover {
   color: white;
+}
+
+.props {
+  position: absolute;
+  bottom: 16px;
+  right: -5px;
+}
+
+.hear {
+  position: relative;
 }/*# sourceMappingURL=scss.css.map */

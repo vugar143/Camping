@@ -45,8 +45,8 @@ function Basket({ product, products, basket }) {
                         <button className='btn-checkout'>Proceed To Checkout</button>
 
                     </tbody>
-                </table> : <div><h1>Basket is empty,Go to  </h1>
-                    <NavLink end to="/camplevazimat">Camping Tools</NavLink>
+                </table> : <div><h1>Basket boşdur.Geri dönün  <NavLink end to="/all">Mağazaya</NavLink> </h1>
+                   
                 </div>}
 
 

@@ -52,17 +52,6 @@ const NavLinks = ({products}) => {
                           {mysublinks.image&&  <img src={mysublinks.image} className="w-16 h-14" alt="" />}
                         
                         </Link>
-                  
-                        {/* {mysublinks.sublink?.map((slink) => (
-                          <li className="text-sm text-gray-600 my-2.5">
-                            <Link
-                              to={slink.link}
-                              className="hover:text-primary"
-                            >
-                              {slink.name}
-                            </Link>
-                          </li>
-                        ))} */}
                       </div>
                     ))}
                   </div>

@@ -21,6 +21,7 @@ import Fav from './pages/Fav'
 import AboutUs from './pages/AboutUs'
 import AllProducts from './pages/AllProducts'
 import AllTours from './pages/AllTours'
+import FilteredToursByCategory from "./pages/FilteredToursByCategory"
 function AnimatedRouters() {
   const location = useLocation()
   const isLoginPage = location.pathname === "/login" || location.pathname === "/register";
@@ -62,8 +63,14 @@ function AnimatedRouters() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           ><CampErazileri /></motion.div>} />
+           <Route path='/category/:tour_category_name' element={<motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          ><FilteredToursByCategory /></motion.div>} />
+
            <Route path='/alltours' element={<AllTours></AllTours>}/>
-          <Route path='/category/:category_name' element={<motion.div
+          <Route path='/pcategory/:category_name' element={<motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
