@@ -1,8 +1,7 @@
 import React from 'react'
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { Button } from 'react-bootstrap'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import {useEffect} from 'react'
 import { useNavigate,NavLink } from 'react-router-dom';
 function SaleOffers() {

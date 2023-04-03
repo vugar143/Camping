@@ -1,5 +1,4 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
 import { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -32,7 +31,7 @@ function PopularTours({tours,tour}) {
                                 <div className="cart-content">
                                     <h1 className='content-title'>{a.name}</h1>
                                     <p className='content-price'>From $ {a.discount_price}</p>
-                                    <Button className='btn-transparent'>Explore</Button>
+                                    <button className='btn-transparent'>Explore</button>
                                 </div>
                             </div>
                         </Link>

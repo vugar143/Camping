@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import { useParams, NavLink } from 'react-router-dom'
 import Footer from '../components/Footer'
 import { FaStar } from "react-icons/fa"
-import { typographyClasses } from '@mui/material'
 import StarRatings from 'react-star-ratings';
 import { connect } from 'react-redux'
 function BlogDetails({ user,blogs }) {

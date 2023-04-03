@@ -5,7 +5,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {connect} from "react-redux"
 import AnimatedRouters from './AnimatedRouters';
 import Navbar from './components/Navbar';
-import {Button} from "react-bootstrap"
 import { useLocation } from 'react-router-dom';
 
 function App({dispatch}) {
