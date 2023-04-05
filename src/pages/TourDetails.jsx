@@ -176,7 +176,6 @@ function TourDetails({ tour_detail, dispatch, user }) {
 
           <div className='text'>
             <h1>Tours</h1>
-
           </div>
         </div>
       </div>

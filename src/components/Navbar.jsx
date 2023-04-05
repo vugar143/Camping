@@ -14,7 +14,8 @@ const Navbar = ({ location, basket, user, dispatch, fav, products, tours }) => {
   const [userName, setUserName] = useState("")
   const [categoryId, setCategoryId] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('');
-  console.log(tours)
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  console.log(user)
   const handleModal = () => {
     setModal(!modal)
   }
@@ -45,6 +46,10 @@ const Navbar = ({ location, basket, user, dispatch, fav, products, tours }) => {
   if (pathname === '/login' || pathname === '/register') {
     return null; // render nothing if current route is '/login'
   }
+var a="hello";
+var b="llo"
+ var c=a-b
+ console.log(c)
 
   const setProductsByCategoryId = (categoryId) => {
     return (dispatch) => {
@@ -132,7 +137,7 @@ const Navbar = ({ location, basket, user, dispatch, fav, products, tours }) => {
                   {tours.map((a)=>(
                       <div>
                        <NavLink className="text-lg font-semibold sublinksli" to={`/type/${a.type.name}`}>{a.type.name}
-                        {a.images[3].image&&<img className="w-16 h-14" src={a.images[3].image} alt="" />}
+                        {a?.images[3].image&&<img className="w-16 h-14" src={a?.images[3].image} alt="" />}
                        </NavLink>
          
                       </div>
@@ -171,7 +176,7 @@ const Navbar = ({ location, basket, user, dispatch, fav, products, tours }) => {
           <li>  <Link className="mynavbarli" end to="/blog">Blog</Link></li>
           <li>  <Link className="mynavbarli" end to="/elaqe">Haqqımızda</Link></li>
 
-          <li>
+          {/* <li>
             {user ? <h6 className="text-white text-base font-bold m-4">{user.toUpperCase()}</h6> : <i
               onClick={() =>
                 dispatch({
@@ -182,7 +187,29 @@ const Navbar = ({ location, basket, user, dispatch, fav, products, tours }) => {
               className="fa-solid fa-user"
             />}
 
-          </li>
+          </li> */}
+           
+    {user ? (
+      <>
+        <li className="h-12 w-10"   >
+        <img className="w-7 h-12 cursor-pointer" src="/images/user-icon-up.svg" onMouseEnter={() => {setIsModalOpen(true)}} />
+       
+        </li>
+      </>
+    ) : (
+      <img className="w-7 h-7" src="/images/user-icon-up.svg" onMouseEnter={() => dispatch({ type: "OPEN_MODAL" })}  />
+    )}
+    {isModalOpen && (
+      <div className="modal-open">
+         <button className="modal-btn-close" onClick={()=>setIsModalOpen(false)}><ion-icon name="close"></ion-icon></button>
+        <p>{user}</p>
+        <hr />
+        <p>{user.email}</p>
+        {user ? <li><button className="text-orange-700" onClick={logOutFunc} >Log Out</button></li> : null}
+      </div>
+    )}
+  
+
            <li className="ket">
                 <NavLink className="icons" to="/basket">
                   <i className="fa-solid fa-basket-shopping" />
@@ -195,8 +222,6 @@ const Navbar = ({ location, basket, user, dispatch, fav, products, tours }) => {
                   <div className="props">{fav.length?fav.length :null }</div>
                 </NavLink>
               </li>
-      
-          {user ? <li><button onClick={logOutFunc} className="logout-btn">Log Out</button></li> : null}
         </ul>
 
         {/* Mobile nav */}

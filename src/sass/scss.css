@@ -3596,4 +3596,22 @@ label {
 
 .hear {
   position: relative;
+}
+
+.modal-open {
+  position: absolute;
+  top: 17%;
+  left: 83%;
+  width: 150px;
+  transform: translate(-50%, -50%);
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+}
+.modal-open .modal-btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
 }/*# sourceMappingURL=scss.css.map */
