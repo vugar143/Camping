@@ -6,12 +6,15 @@ const initialState = {
     product: {},
     tour_detail: {},
     tours: [],
+    zonas:[],
+    zona:{},
     user: JSON.parse(window.localStorage.getItem("user1"))
         ? JSON.parse(window.localStorage.getItem("user1"))
         : "",
     blogs: [],
     totalPagess: "",
     ptotalPages: "",
+    ztotalPages:"",
     error: null,
     fav: JSON.parse(window.localStorage.getItem("fav"))
         ? JSON.parse(window.localStorage.getItem("fav"))
@@ -56,6 +59,8 @@ export default function Reducer(state = initialState, action) {
             return { ...state, totalPagess: action.payload };
         case 'SET_PTOTALPAGES':
             return { ...state, ptotalPages: action.payload };
+            case 'SET_ZTOTALPAGES':
+                return { ...state, ztotalPages: action.payload };
         case 'SET_ERROR':
             return { ...state, error: action.payload };
         case "FAV":
@@ -69,6 +74,10 @@ export default function Reducer(state = initialState, action) {
                 ...state,
                 fav: [...state.fav.filter((a) => a.id !== action.payload)],
             };
+            case 'SET_ZONAS':
+                return { ...state, zonas: action.payload };
+                case 'SET_ZONA':
+                    return { ...state, zona: action.payload };
         default:
             return state
     }

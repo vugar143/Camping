@@ -7,7 +7,7 @@ import AnimatedRouters from './AnimatedRouters';
 import Navbar from './components/Navbar';
 import { useLocation } from 'react-router-dom';
 
-function App({dispatch}) {
+function App({dispatch,products}) {
   let loc = useLocation();
   useEffect(() => {
     window.scrollTo({
@@ -18,11 +18,12 @@ function App({dispatch}) {
     fetch("http://127.0.0.1:8080/equipment/listc/")
     .then((a)=>a.json())
     .then((a)=>{
-       const itemsPerPage = 4; // Change this value as needed
+       const itemsPerPage = 6; // Change this value as needed
       const totalItems = a.count;
-      const totalpPages = Math.ceil(totalItems / itemsPerPage);
+      const totalpPages =a.total_pages;
       console.log(totalpPages)
       console.log(a.count)
+      console.log(totalItems)
       dispatch({
         type: "SET_PRODUCTS",
         payload:a.results,
@@ -37,10 +38,10 @@ function App({dispatch}) {
   useEffect(()=>{
     fetch("http://127.0.0.1:8080/tour/tourlist/")
     .then((a)=>a.json())
-    .then((a)=>{
+    .then((a)=>{console.log(a)
       const itemsPerPage = 4; // Change this value as needed
       const totalItems = a.count;
-      const totalPages = Math.ceil(totalItems / itemsPerPage);
+      const totalPages = a.total_pages;
  
       dispatch({
         type: "SET_TOURS",
@@ -65,12 +66,31 @@ function App({dispatch}) {
            })
        })
 }, [])
-  
+useEffect(()=>{
+  fetch("http://127.0.0.1:8080/tour/DestinationList/")
+  .then((a)=>a.json())
+  .then((a)=>{console.log(a)
+    const itemsPerPage = 4; // Change this value as needed
+    const totalItems = a.count;
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    dispatch({
+      type: "SET_ZONAS",
+      payload:a.results,
+     
+    }),
+    dispatch({
+      type: "SET_ZTOTALPAGES",
+      payload:totalPages,
+     
+    })
+  })
+},[])
   return (
   <>
 <AnimatedRouters/>
   </>
   )
 }
-
-export default connect() (App)
+const t=(a)=>a
+export default connect(t) (App)

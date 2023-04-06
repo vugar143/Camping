@@ -22,6 +22,8 @@ import AboutUs from './pages/AboutUs'
 import AllProducts from './pages/AllProducts'
 import AllTours from './pages/AllTours'
 import FilteredToursByCategory from "./pages/FilteredToursByCategory"
+import Zona from './components/Zona'
+import ZonaDetails from './pages/ZonaDetails'
 function AnimatedRouters() {
   const location = useLocation()
   const isLoginPage = location.pathname === "/login" || location.pathname === "/register";
@@ -103,6 +105,7 @@ function AnimatedRouters() {
           ><Fav /></motion.div>} />
           <Route path="/detail/:id" element={<Details />} />
           <Route path="/tour/:id" element={<TourDetails />} />
+          <Route path="/zona/:id" element={<ZonaDetails/>}/>
           <Route path="/blogdetails/:id" element={<BlogDetails />} />
           <Route path='/elaqe' element={<motion.div
             initial={{ opacity: 0 }}

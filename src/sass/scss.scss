@@ -3810,3 +3810,7 @@ margin: 50px;
     right: 0;
   }
 }
+.zona-container{
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+}

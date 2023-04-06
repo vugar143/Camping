@@ -3614,4 +3614,9 @@ label {
   position: absolute;
   top: 0;
   right: 0;
+}
+
+.zona-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }/*# sourceMappingURL=scss.css.map */
