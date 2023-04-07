@@ -119,7 +119,7 @@ function AboutUs() {
                 <div
                   className="artistimg"
                   data-aos="fade-right"
-                  data-aos-duration="2000"
+                  // data-aos-duration="2000"
                 >
                   <img src="https://cdn.bolvo.com/assets/viasun/team-item-1.jpg" />
                 </div>
@@ -131,7 +131,7 @@ function AboutUs() {
                 <div
                   className="artistimg"
                   data-aos="fade-up"
-                  data-aos-duration="2000"
+                  // data-aos-duration="2000"
                 >
                   <img src="https://cdn.bolvo.com/assets/viasun/team-item-2.jpg" />
                 </div>
@@ -143,7 +143,7 @@ function AboutUs() {
                 <div
                   className="artistimg"
                   data-aos="fade-left"
-                  data-aos-duration="2000"
+                  // data-aos-duration="2000"
                 >
                   <img src="https://cdn.bolvo.com/assets/viasun/team-item-3.jpg" />
                 </div>
@@ -168,7 +168,7 @@ function AboutUs() {
                 data-aos="fade-right"
                 data-aos-duration="3000"
               >
-                <img src="https://marka-logo.com/wp-content/uploads/2020/12/Decathlon-Logo.png" />
+                <img src="/images/decathlon.png" />
               </div>
               <div
                 className="collob"

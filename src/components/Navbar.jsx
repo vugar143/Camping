@@ -136,8 +136,8 @@ var b="llo"
                    
                   {tours.map((a)=>(
                       <div>
-                       <NavLink className="text-lg font-semibold sublinksli" to={`/type/${a.type.name}`}>{a.type.name}
-                        {a?.images[3].image&&<img className="w-16 h-14" src={a?.images[3].image} alt="" />}
+                       <NavLink className="text-lg font-semibold sublinksli" to={`/type/${a?.type?.name}`}>{a?.type?.name}
+                        {a?.images[0]?.image&&<img className="w-16 h-14" src={a?.images[0]?.image} alt="" />}
                        </NavLink>
          
                       </div>

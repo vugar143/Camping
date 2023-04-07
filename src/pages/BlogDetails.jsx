@@ -11,6 +11,16 @@ function BlogDetails({ user,blogs }) {
     const [blog, setBlog] = useState({})
     console.log(blog)
     const [comment, setComment] = useState([])
+    const [showAllComments, setShowAllComments] = useState(false);
+
+    //comments
+  const handleReadMoreClick = () => {
+    setShowAllComments(true);
+  };
+
+  const displayedComments = showAllComments ? comment : comment.slice(0, 3);
+
+
   console.log(user)
   console.log(blogs)
     const [input, setInput] = useState({
@@ -94,20 +104,23 @@ function BlogDetails({ user,blogs }) {
             <hr />
             {comment.length? <div className="wrapper">
                    
-                   {comment.map((comment) => (
-                    
-  <div>
-   <h1>{user.toUpperCase()}</h1>
-     <StarRatings
-       rating={comment.rating}
-       starRatedColor="orange"
-       starDimension="20px"
-       starSpacing="5px"
-     />
-     <p>{comment.content}</p>
-   </div>
-
-                   ))}
+            <div className="wrapper">
+      {displayedComments.map((comment) => (
+        <div key={comment.id}>
+          <h1>{user.toUpperCase()}</h1>
+          <StarRatings
+            rating={comment.rating}
+            starRatedColor="orange"
+            starDimension="20px"
+            starSpacing="5px"
+          />
+          <p>{comment.content}</p>
+        </div>
+      ))}
+      {!showAllComments && comment.length > 3 && (
+        <button className='read-more-comments' onClick={handleReadMoreClick}>Read More</button>
+      )}
+    </div>
              
 
                </div>:<h6 className='text-center'>Komment yoxdur...</h6>}

@@ -7,46 +7,7 @@ import {useState,useEffect} from "react"
 function Zonalar({zonas,ztotalPages,dispatch}) {
   const [currentPage, setCurrentPage] = useState(1);
   const [displayedPages, setDisplayedPages] = useState([1]);
-  const [categoryId, setCategoryId] = useState('');
-  const [allBlogs, setAllBlogs] = useState([]);
-  const [blogName, setBlogName] = useState('');
-  const [filteredProducts,setFilteredProducts]=useState([])
-  const handleSearch=(e)=>{
-    setBlogName(e.target.value)
-    dispatch(setBlogsByName(blogName))
-  }
 
-  function setBlogsByName (blogName) {
-    return(dispatch) => {
-        const url = `http://127.0.0.1:8080/tour/DestinationList/?name=${blogName}`;
-        fetch(url)
-        .then(response => response.json())
-        .then(data => dispatch({ type: "SET_BLOGS", payload: data.results }))
-        .catch(error => console.error(error));
-    }
-  }
-
-
-  const handleFilter = (event) => {
-    const categoryId = event.target.getAttribute('data-id');
-    
-    setCategoryId(categoryId);
-    dispatch(setBlogsByCategoryId(categoryId));
-    console.log(categoryId)
-  };
-
-  useEffect(()=>{
-    let categoryDyn=zonas.filter((a)=>a.name==categoryId)
-    setFilteredProducts(categoryDyn) 
-},[categoryId])
-console.log(filteredProducts)
-
-  const allProducts = () => {
-    setCategoryId("");
-    setBlogName("");
-    dispatch(setBlogsByName(""));
-    dispatch(setBlogsByCategoryId(""));
-}
  
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -94,7 +55,7 @@ console.log(filteredProducts)
         <div className="blog-section ">
               {zonas.length > 0 ? (
                 <div className="zona-container">
-                  {filteredProducts.map((a) => (
+                  {productsToDisplay.map((a) => (
                     <Zona key={a.id} zona={a} />
                   ))}
                 </div>
@@ -108,29 +69,7 @@ console.log(filteredProducts)
                 </div>
               )}
             </div>
-            
-            <div className="blog-categories  ml-5">
-                    <div className="search-button ">
-                        <input value={blogName} onChange={ handleSearch} type="text" placeholder='Search Blogs...' />
-                        <button className="search-icon df"><i className="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                    <h1>Category</h1>
-                        <ul className='categories-ul'>
-                            {zonas.map((blogg) => {
-                                console.log(blogg); // add this line to inspect the blogg objects
-                                return (
-                                    <>
-                                    <li data-id={blogg.name ? blogg.name.toString() : ""} onClick={handleFilter}>
-                                        <i class="fa-solid fa-arrow-right"></i>
-                                        {blogg.name}
-                                    </li>
-                                     <div id="category-line"></div>
-                                     </>
-                                );
-                            })}
-  <button onClick={allProducts}>Return To All Products.</button>
-                        </ul>
-                        </div>
+         
             </div>
             <div className="pagination flex gap-10">
             <button onClick={handlePreviousPage} className="prev">Evvelki</button>

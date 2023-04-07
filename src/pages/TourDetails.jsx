@@ -23,6 +23,7 @@ function TourDetails({ tour_detail, dispatch, user }) {
   const [star, setStar] = useState(null)
   const [hover, setHover] = useState(null)
   const [comment, setComment] = useState([])
+  const [showAllComments, setShowAllComments] = useState(false);
   const [bookInput, setBookInput] = useState({
     name: "",
     surname: "",
@@ -81,20 +82,15 @@ function TourDetails({ tour_detail, dispatch, user }) {
       .then((a) => a);
 
   };
-  // const handleBookForm = async (e) => {
-  //   e.preventDefault()
-  //   const data = await fetch("http://127.0.0.1:8080/comment/tccreate", {
-  //     method: "POST",
-  //     mode: "cors",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Accept: "application/json",
-  //     },
-  //     body: JSON.stringify(bookInput),
-  //   })
-  //     .then((data) => data.json())
-  //     .then((data) => data)
-  // }
+
+
+//comments
+  const handleReadMoreClick = () => {
+    setShowAllComments(true);
+  };
+
+  const displayedComments = showAllComments ? comment : comment.slice(0, 4);
+
   const handleBookForm = () => {
     Swal.fire({
       title: 'Are you sure?',
@@ -298,27 +294,7 @@ function TourDetails({ tour_detail, dispatch, user }) {
 
                 <p>Total:${totalValue ? totalValue : 0}</p>
                 <div className="submit-booking df">
-                  {/* <button className="btn-green" onClick={() => {
-                    Swal.fire({
-                      title: 'Are you sure?',
-                      text: "Just one click beyond from your amazing tour",
-                      icon: 'warning',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Yes, I accept it'
-                    }).then((result) => {
-                      if (result.isConfirmed) {
-                        handleBookForm(); // Call the handleBookForm function
-                        // window.location.reload();
-                        Swal.fire(
-                          'Your request is accepted',
-                          'We will send invoice to your email',
-                          'success'
-                        )
-                      }
-                    })
-                  }}>Book Now</button> */}
+                
                   <button className='btn-green' onClick={handleBookForm}>Book Now</button>
                 </div>
               </div>
@@ -335,22 +311,26 @@ function TourDetails({ tour_detail, dispatch, user }) {
       <div className="reviews-detailed-blogs">
         <h1 className='costumer-review'>Musteri deyerlendirmeleri</h1>
         <hr />
+
         {comment?.length ? <div className="wrapper">
 
-          {comment?.map((comment) => (
-
-            <div>
-              <h1>{user.toUpperCase()}</h1>
-              <StarRatings
-                rating={comment.rating}
-                starRatedColor="orange"
-                starDimension="20px"
-                starSpacing="5px"
-              />
-              <p>{comment.content}</p>
-            </div>
-
-          ))}
+        <div className="wrapper">
+      {displayedComments.map((comment) => (
+        <div key={comment.id}>
+          <h1>{user.toUpperCase()}</h1>
+          <StarRatings
+            rating={comment.rating}
+            starRatedColor="orange"
+            starDimension="20px"
+            starSpacing="5px"
+          />
+          <p>{comment.content}</p>
+        </div>
+      ))}
+      {!showAllComments && comment.length > 4 && (
+        <button className='read-more-comments' onClick={handleReadMoreClick}>Read More</button>
+      )}
+    </div>
 
 
         </div> : <h6 className='text-center'>Komment yoxdur...</h6>}

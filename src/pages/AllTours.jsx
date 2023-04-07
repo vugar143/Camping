@@ -13,30 +13,46 @@ function CampErazileri({ tours, dispatch,totalPagess}) {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 const [displayedPages, setDisplayedPages] = useState([1]);
-console.log(tours)
   const handleEventType = (e) => {
     console.log("Selected event type: ", e.target.value);
     setEventType(prevEventType => e.target.value);
   }
   tours.filter((a)=>{
    let b=a.type.name
-   console.log(b)
   })
- console.log(tours)
   const handleEventCategory = (e) => {
 
     setEventCategory(e.target.value);
 
   }
   // Update displayed pages when total pages change
+  const handleNextPage=()=>{
+    if(currentPage<totalPagess){
+      setCurrentPage(currentPage+1)
+    }
+  }
+  const handlePreviousPage=()=>{
+    if(currentPage>1){
+      setCurrentPage(currentPage-1)
+    }
+  }
+  const handlePageClick=(pageNumber)=>{
+    setCurrentPage(pageNumber)
+  }
 useEffect(() => {
   const pages = [];
   for (let i = 1; i <= totalPagess; i++) {
   pages.push(i);
- 
+ console.log(totalPagess)
   }
   setDisplayedPages(pages);
   }, [totalPagess]);
+
+  const startIndex=(currentPage-1)*6
+  const endIndex=startIndex+6
+  const productsToDisplay=tours.slice(startIndex,endIndex)
+
+
   const searchName = (e) => {
     const searchTour = e.target.value
     setTourName(searchTour)
@@ -100,25 +116,7 @@ useEffect(() => {
     setSelectedDate('');
     searchTours('', '', '', '', '');
   };
-  //pagination next prev btns
-  const handleNextPage = (year,month) => {
-    
-if(currentPage<totalPagess){
-      console.log(111)
-      searchTours(eventCategory, eventType, tourName, year, month, currentPage + 1);
-}
-  };
-  
-  // Handle previous page button click
-  const handlePreviousPage = (year,month) => {
-    if (currentPage > 1) {
-      searchTours(eventCategory, eventType, tourName, year, month, currentPage - 1);
-    }
-  };
-  const handlePageClick = (page,year,month) => {
-    setCurrentPage(page);
-    searchTours(eventCategory, eventType, tourName, year, month, page);
-    };
+
   return (
     <>
       <div className='basket-image'>
@@ -186,7 +184,7 @@ if(currentPage<totalPagess){
             <div className="tours-container">
               {tours.length > 0 ? (
                 <div className="tours">
-                  {tours.map((a) => (
+                  {productsToDisplay.map((a) => (
                     <Tour key={a.id} tour={a} />
                   ))}
                 </div>

@@ -24,7 +24,7 @@ function PopularTours({tours,tour}) {
                         <div id='dark-line'></div>
                     </div>
                     <div className="carts">
-                        {tours.map((a)=>(
+                        {tours.slice(0,4).map((a)=>(
                             <Link className="item" data-aos="fade-right"  to={`/tour/${a?.id}`}>
                             <div className="cart">
                                 <img src={a.main_product_image} alt="" />
@@ -38,7 +38,7 @@ function PopularTours({tours,tour}) {
                   
                         ))}
                           </div>
-                    <div className="btn-explore df"> <NavLink end to="/CampErazileri" className='btn-brown df' >Explore More</NavLink>
+                    <div className="btn-explore df"> <NavLink end to="/alltours" className='btn-brown df' >Explore More</NavLink>
                     </div>
                 </div>
 

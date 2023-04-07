@@ -14,17 +14,7 @@ function CampErazileri({ tours, dispatch,totalPagess}) {
   const [currentPage, setCurrentPage] = useState(1);
 const [displayedPages, setDisplayedPages] = useState([1]);
 const [filteredTours,setFilteredTours]=useState([])
-console.log(tours)
-  const handleEventType = (e) => {
-    console.log("Selected event type: ", e.target.value);
-    setEventType(prevEventType => e.target.value);
-  }
 
-  const handleEventCategory = (e) => {
-
-    setEventCategory(e.target.value);
-
-  }
   useEffect(()=>{
     let dynamicType=tours.filter((a)=>a.type.name==tour_type_name.tour_type_name)
     setFilteredTours(dynamicType)
@@ -39,88 +29,26 @@ useEffect(() => {
   }
   setDisplayedPages(pages);
   }, [totalPagess]);
-  const searchName = (e) => {
-    const searchTour = e.target.value
-    setTourName(searchTour)
+  
+const handleNextPage=()=>{
+  if(currentPage<totalPagess){
+    setCurrentPage(currentPage+1)
   }
-  const handleDateChange = (e) => {
-    setSelectedDate(e.target.value);
-  };
-  const searchTours = (eventCategory, eventType, tourName, year, month, page=1) => {
-    let url = 'http://127.0.0.1:8080/tour/tourlist/?';
-  
-    if (eventCategory) {
-      url += `category__id=${eventCategory}&`;
-    }
-    if (eventType) {
-      url += `type__id=${eventType}&`;
-    }
-    if (tourName) {
-      url += `name=${tourName}&`;
-    }
-    if (year && month) {
-      url += `date_after=${year}-${month}-01&date_before=${year}-${month}-31&`;
-    }
-    if (page) {
-      url += `page=${page}&`;
-    }
-    url += 'limit=4';
-  
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data.length)
-        if ('date' in data && data.date[0] === 'Enter a valid date.') {
-          setError('No tours available for selected date');
-        } else {
-          dispatch({ type: 'SET_TOURS', payload: data.results });
-          dispatch({ type: 'SET_PAGINATION', payload: data });
-       
-          setCurrentPage(page);
-          setError(null);
-        }
-      })
-      .catch((error) => console.error(error.data));
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!selectedDate) {
-      alert('Please select a date');
-      return;
-    }
-    const [year, month] = selectedDate.split('-');
-    if (eventCategory === '' && eventType === '' && tourName === '') {
-      searchTours();
-    } else {
-      searchTours(eventCategory, eventType, tourName, year, month);
-    }
-  };
-  const handleReset = () => {
-    setTourName('');
-    setEventCategory('');
-    setEventType('');
-    setSelectedDate('');
-    searchTours('', '', '', '', '');
-  };
-  //pagination next prev btns
-  const handleNextPage = (year,month) => {
-    
-if(currentPage<totalPagess){
-      console.log(111)
-      searchTours(eventCategory, eventType, tourName, year, month, currentPage + 1);
 }
-  };
-  
-  // Handle previous page button click
-  const handlePreviousPage = (year,month) => {
-    if (currentPage > 1) {
-      searchTours(eventCategory, eventType, tourName, year, month, currentPage - 1);
+
+  const handlePreviousPage=()=>{
+    if (currentPage>1){
+      setCurrentPage(currentPage-1)
     }
-  };
-  const handlePageClick = (page,year,month) => {
-    setCurrentPage(page);
-    searchTours(eventCategory, eventType, tourName, year, month, page);
-    };
+  }
+  const handlePageClick=(pageNumber)=>{
+    setCurrentPage(pageNumber)
+  }
+
+const startIndex=(currentPage-1)*6
+const endIndex=startIndex+6
+
+
   return (
     <>
       <div className='basket-image'>
@@ -144,6 +72,7 @@ if(currentPage<totalPagess){
            <h1></h1>
            <p></p>
             </div>
+            
             <div className="tours-container">
               {tours.length > 0 ? (
                 <div className="tours">
@@ -180,6 +109,7 @@ if(currentPage<totalPagess){
         </div>
 
       </section>
+
       <Footer />
     </>
   )

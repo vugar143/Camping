@@ -3088,6 +3088,7 @@ label {
 //blogpage
 .blog-section{
   display: grid;
+  
   grid-template-columns: repeat(2,1fr);
   gap: 20px;
   .blogpage-section{
@@ -3102,8 +3103,8 @@ label {
       flex-direction: column;
         text-decoration: none;
         color: black;
-      height: 561px;
-      width: 520px;
+      height: 461px;
+      width: 500px;
       margin: 25px 0;
       border: 1px solid #e3dcd9;
       &:hover {
@@ -3114,11 +3115,16 @@ label {
       h1{
         text-decoration: none !important;
         text-align: center;
+        font-size: 30px;
+        padding: 14px;
+      }
+      p{
+        padding: 15px;
       }
       img{
-        width: 80%;
-        height: 60%;
-        object-fit: cover;
+        width: 70%;
+        height: 45%;
+        object-fit:contain;
        
       }
     }
@@ -3813,4 +3819,10 @@ margin: 50px;
 .zona-container{
   display: grid;
   grid-template-columns: repeat(2,1fr);
+}
+.read-more-comments{
+  color: #217b2d;
+  &:hover{
+    color:#007CC7 ;
+  }
 }

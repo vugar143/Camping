@@ -9,7 +9,7 @@ function ProductsLand({products}) {
         AOS.init({ duration: 1300 });
     }, [])
 
-
+console.log(products)
   return (
     <>
     
@@ -22,7 +22,7 @@ function ProductsLand({products}) {
         <div id="line-products"></div>
         </div>
             <div className="products">
-              {products.map((product)=>(
+              {products.slice(0,4).map((product)=>(
                 <Product key={product.id} item={product}/>
               ))}
                 

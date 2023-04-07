@@ -31,18 +31,14 @@ function ZonaDetails({zona,dispatch}) {
                 </div>
 
             </div>
-    <div className="detailed-blog ">
+    <div className="detailed-blog mb-20 ">
     <div className="wrapper flex justify-center align-center gap-10">
         <div className="blog-detail">
             <img src={zona.image} alt="" />
             <h1>{zona.name}</h1>
             <p>{zona.description}</p>
         </div>
-
-      
-
     </div>
-    <hr />
 </div>
 <Footer/>
 </>

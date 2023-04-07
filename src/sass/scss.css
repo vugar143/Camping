@@ -2844,8 +2844,8 @@ label {
   flex-direction: column;
   text-decoration: none;
   color: black;
-  height: 561px;
-  width: 520px;
+  height: 461px;
+  width: 500px;
   margin: 25px 0;
   border: 1px solid #e3dcd9;
 }
@@ -2857,12 +2857,17 @@ label {
 .blog-section .blogpage-section .myblogs-container .blog-qutu h1 {
   text-decoration: none !important;
   text-align: center;
+  font-size: 30px;
+  padding: 14px;
+}
+.blog-section .blogpage-section .myblogs-container .blog-qutu p {
+  padding: 15px;
 }
 .blog-section .blogpage-section .myblogs-container .blog-qutu img {
-  width: 80%;
-  height: 60%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  width: 70%;
+  height: 45%;
+  -o-object-fit: contain;
+     object-fit: contain;
 }
 
 .detailed-blog .blog-detail {
@@ -3619,4 +3624,11 @@ label {
 .zona-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+}
+
+.read-more-comments {
+  color: #217b2d;
+}
+.read-more-comments:hover {
+  color: #007CC7;
 }/*# sourceMappingURL=scss.css.map */

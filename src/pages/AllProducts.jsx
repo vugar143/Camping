@@ -90,21 +90,13 @@ console.log(filteredProducts)
     setCurrentPage(pageNumber);
   }
 
-  // Update displayed pages when total pages change
-  useEffect(() => {
-    const pages = [];
-    for (let i = 1; i <= ptotalPages; i++) {
-      pages.push(i);
-    }
-    setDisplayedPages(pages);
-  }, [ptotalPages]);
+
 
   // Calculate the start and end indexes of the products to be displayed on the current page
-  const startIndex = (currentPage - 1) * 4;
-  const endIndex = startIndex + 4;
+  const startIndex = (currentPage - 1) * 6;
+  const endIndex = startIndex + 6;
   const productsToDisplay = products.slice(startIndex, endIndex);
-  console.log(productsToDisplay)
-  console.log(products)
+
   return (
     <>
       <div className='basket-image'>
