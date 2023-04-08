@@ -43,7 +43,7 @@ function Zonalar({zonas,ztotalPages,dispatch}) {
    <>
     <div className='basket-image'>
         <img src="http://fastwpdemo.com/newwp/amping/wp-content/uploads/2022/03/page-title.jpg" alt="" />
-        <div className='links'><NavLink end to="/">Home</NavLink> / <NavLink end to="/camperazileri">Tours</NavLink>
+        <div className='links'><NavLink end to="/">Home</NavLink> / <NavLink end to="/alltours">Tours</NavLink>
 
           <div className='text'>
             <h1>Tours</h1>

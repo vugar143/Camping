@@ -4,6 +4,7 @@ import { links } from "../components/MyLinks"
 import Footer from "../components/Footer"
 import { connect } from 'react-redux'
 import Tour from '../components/Tour'
+import Adventure from '../components/Adventure'
 function CampErazileri({ tours, dispatch, totalPagess, zonas }) {
   const tour_category_name = useParams()
   const [tourName, setTourName] = useState('');
@@ -18,7 +19,7 @@ function CampErazileri({ tours, dispatch, totalPagess, zonas }) {
   console.log(tours)
 
   useEffect(() => {
-    let dynamicType = tours.filter((a) => a.category.name == tour_category_name.tour_category_name)
+    let dynamicType = tours.filter((a) => a.category?.name == tour_category_name.tour_category_name)
     setFilteredTours(dynamicType)
   }, [tour_category_name])
   console.log(filteredTours)
@@ -59,33 +60,20 @@ function CampErazileri({ tours, dispatch, totalPagess, zonas }) {
   };
   return (
     <>
-      <div className='basket-image'>
-        <img src="http://fastwpdemo.com/newwp/amping/wp-content/uploads/2022/03/page-title.jpg" alt="" />
-        <div className='links'><NavLink end to="/">Home</NavLink> / <NavLink end to="/camperazileri">Tours</NavLink>
-
+    {filteredZonez.map((zona)=>(
+      <>
+      <div className='zona-image'>
+      <img src={zona.image} alt="" />
           <div className='text'>
-            <h1>Tours</h1>
-
+          <h1>{zona.name}</h1>
+          <p>{zona.description}</p>
           </div>
         </div>
-      </div>
+      </>
+    ))}
+      
       <section className='tours-layout mt-7'>
         <div className="wrapper">
-        {filteredZonez.map((zona) => {
-              console.log(zona)
-              return(
-                <div className="detailed-blog mb-20 ">
-                <div className="wrapper flex justify-center align-center gap-10">
-                  <div className="blog-detail">
-                    <img src={zona.image} alt="" />
-                    <h1>{zona.name}</h1>
-                    <p>{zona.description}</p>
-                  </div>
-                </div>
-              </div>
-              )
-            
-            })}
           <div className="tours-box flex w-full ">
             <div className="search-tours flex justify-center w-72 bg-cyan-600">
               <div className="title-search pt-3">
@@ -134,6 +122,7 @@ function CampErazileri({ tours, dispatch, totalPagess, zonas }) {
         </div>
 
       </section>
+      <Adventure/>
       <Footer />
     </>
   )

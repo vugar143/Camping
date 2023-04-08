@@ -13,7 +13,7 @@ function Basket({ product, products, basket }) {
 
             <div className='basket-image'>
                 <img src="../../images/bg-cart.jpeg" alt="" />
-                <div className='links'><NavLink end to="/">Home</NavLink> / <NavLink end to="/camplevazimat">Camping Tools</NavLink>  / Cart
+                <div className='links'><NavLink end to="/">Home</NavLink> / <NavLink end to="/all">Magaza</NavLink>  / Cart
 
                     <div className='text'>
                         <h1>My Cart</h1>

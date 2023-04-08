@@ -26,7 +26,7 @@ function Adventure() {
           <p className='adv-tex'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.
 
           </p>
-          <NavLink end to="/camperazileri" className="btn-brown ">Discover More</NavLink>
+          <NavLink end to="/alltours" className="btn-brown ">Discover More</NavLink>
           </div>
         </div>
       </main>

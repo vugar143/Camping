@@ -109,7 +109,7 @@ var b="llo"
                    
                   {tours.map((a)=>(
                       <div>
-                       <NavLink className="text-lg font-semibold sublinksli" to={`/category/${a.category.name}`}>{a.category.name}
+                       <NavLink className="text-lg font-semibold sublinksli" to={`/category/${a.category?.name}`}>{a.category?.name}
                        {a.main_product_image&&  <img className="w-16 h-14" src={a.main_product_image} alt="" />}
                        </NavLink>
          
