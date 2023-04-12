@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link,NavLink } from 'react-router-dom'
 
 function Footer() {
   return (
@@ -47,8 +48,8 @@ function Footer() {
                 </ul>
                 <ul className='costumer-service'>
                     <li>Useful Links</li>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Contact</a></li>
+                    <li><NavLink end to="/haqqimizda">Haqqimizda</NavLink></li>
+                    <li><NavLink end to="/elaqe">Contact</NavLink></li>
                     <li><a href="">Adventure</a></li>
                     <li><a href="">Privacy Policy</a></li>
                     <li><a href="">Term Of Use</a></li>

@@ -88,12 +88,12 @@ var b="llo"
         </div>
 
         <ul className="nav-ul md:flex hidden uppercase items-center gap-8 font-[Poppins]">
-          <li>
-            <Link to="/" className="mynavbarli py-3 px-3 inline-block">
+          <li className="px-3 text-left md:cursor-pointer navbar__item">
+            <Link to="/" className="mynavbarli ">
               AzKamp
             </Link>
           </li>
-          <li className="px-3 text-left md:cursor-pointer group">
+          <li className="px-3 text-left md:cursor-pointer navbar__item group">
             <NavLink className="text-lg font-semibold mynavbarli" to="/zonalar">
               Zonalar
             </NavLink>
@@ -120,8 +120,8 @@ var b="llo"
                 </div>
           </li>
 
-          <li className="px-3 text-left md:cursor-pointer group">
-            <NavLink className="text-lg font-semibold mynavbarli" to="/alltours">
+          <li className="px-3 text-left md:cursor-pointer group navbar__item">
+            <NavLink className="text-lg font-semibold mynavbarli " to="/alltours">
               Aktivitelər
             </NavLink>
         <div>
@@ -147,7 +147,7 @@ var b="llo"
                 </div>
           </li>
 
-          <li className="px-3 text-left md:cursor-pointer group">
+          <li className="px-3 text-left md:cursor-pointer group navbar__item">
             <NavLink className="text-lg font-semibold mynavbarli" to="/all">
             Mağaza
             </NavLink>
@@ -173,8 +173,9 @@ var b="llo"
                 </div>
                 </div>
           </li>
-          <li>  <Link className="mynavbarli" end to="/blog">Blog</Link></li>
-          <li>  <Link className="mynavbarli" end to="/elaqe">Haqqımızda</Link></li>
+          <li className="px-3 text-left md:cursor-pointer group navbar__item">  <NavLink className="mynavbarli" end to="/blog">Blog</NavLink></li>
+          <li className="px-3 text-left md:cursor-pointer group navbar__item"> <NavLink className="mynavbarli" end to="/haqqimizda">Haqqımızda</NavLink></li>
+          <li className="px-3 text-left md:cursor-pointer group navbar__item"> <NavLink className="mynavbarli" end to="/elaqe">Elaqe</NavLink></li>
 
           {/* <li>
             {user ? <h6 className="text-white text-base font-bold m-4">{user.toUpperCase()}</h6> : <i
