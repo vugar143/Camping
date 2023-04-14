@@ -29,8 +29,8 @@ function Profile({ user }) {
                 </div>
                 <div className='text  mt-36 '>
                     <h3 className='text-white'>{user.toUpperCase()}</h3>
-                    <h4>surname</h4>
-                    <h4>email</h4>
+                    <h4 className='text-white font-semibold'>surname</h4>
+                    <h4 className='text-white font-semibold'>email</h4>
 
                 </div>
             </div>
