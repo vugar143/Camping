@@ -203,9 +203,8 @@ var b="llo"
     {isModalOpen && (
       <div className="modal-open">
          <button className="modal-btn-close" onClick={()=>setIsModalOpen(false)}><ion-icon name="close"></ion-icon></button>
-        <p>{user}</p>
+       <Link className="profile-link" to="/profile">Profile</Link>
         <hr />
-        <p>{user.email}</p>
         {user ? <li><button className="text-orange-700" onClick={logOutFunc} >Log Out</button></li> : null}
       </div>
     )}

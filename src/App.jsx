@@ -85,6 +85,19 @@ useEffect(()=>{
     })
   })
 },[])
+
+useEffect(()=>{
+  fetch(" http://localhost:3000/turlarim")
+  .then((a)=>a.json())
+  .then((a)=>{console.log(a)
+  
+    dispatch({
+      type: "SET_TURLARIM",
+      payload:a,
+     
+    })
+  })
+},[])
   return (
   <>
 <AnimatedRouters/>

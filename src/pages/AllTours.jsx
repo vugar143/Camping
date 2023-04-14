@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Link, NavLink,useParams } from "react-router-dom"
-import { links } from "../components/MyLinks"
 import Footer from "../components/Footer"
 import { connect } from 'react-redux'
 import Tour from '../components/Tour'

@@ -1,0 +1,19 @@
+{
+  "turlarim": [
+    {
+    "id":1,
+    "name":"Quba",
+    "image":"https://cf.bstatic.com/xdata/images/hotel/max1024x768/144008912.jpg?k=094efd9d73663a0a173c1d287eba8155e60e9af97164278ccc0e206d2be24a8c&o=&hp=1"
+    },
+    {
+      "id":2,
+      "name":"Qabala",
+      "image":"https://img.fotocommunity.com/qebele-azerbaijan-5bfdb82e-aaf2-4a4f-b0ff-046614d36810.jpg?height=1080"
+      },
+      {
+        "id":3,
+        "name":"Lenkeran",
+        "image":"https://cdn.turkishairlines.com/m/374381c51861f6d5/original/1400x660-Lenkeran.webp"
+        }
+  ]
+}

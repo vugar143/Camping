@@ -6,6 +6,7 @@ const initialState = {
     product: {},
     tour_detail: {},
     tours: [],
+    turlarim:[],
     zonas:[],
     zona:{},
     user: JSON.parse(window.localStorage.getItem("user1"))
@@ -33,6 +34,8 @@ export default function Reducer(state = initialState, action) {
             return { ...state, user: action.payload };
         case "SET_TOURS":
             return { ...state, tours: action.payload }
+            case "SET_TURLARIM":
+                return { ...state, tours: action.payload }
         case "SET_PRODUCT":
             return { ...state, product: action.payload }
         case "SET_TOUR":

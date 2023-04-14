@@ -25,6 +25,7 @@ import FilteredToursByCategory from "./pages/FilteredToursByCategory"
 import Zona from './components/Zona'
 import ZonaDetails from './pages/ZonaDetails'
 import Contact from './pages/Contact'
+import Profile from './pages/Profile'
 function AnimatedRouters() {
   const location = useLocation()
   const isLoginPage = location.pathname === "/login" || location.pathname === "/register";
@@ -118,6 +119,11 @@ function AnimatedRouters() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
           ><Contact /></motion.div>} />
+            <Route path='/profile' element={<motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          ><Profile /></motion.div>} />
          
         </Routes>
       </AnimatePresence>
