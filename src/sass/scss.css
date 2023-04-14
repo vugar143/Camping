@@ -3832,10 +3832,11 @@ label {
   position: absolute;
   top: -20%;
   left: 0;
-  width: 700px;
+  width: 60% !important;
   background-color: white !important;
   border-radius: 10px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5) !important;
+  border-radius: 10px !important;
   padding: 10px;
   z-index: 2000;
   overflow: auto;
@@ -3878,4 +3879,23 @@ label {
 .modal-content h2 {
   margin-top: 0;
   margin-bottom: 20px;
+}
+
+.muracietlerim {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.muracietlerim th, .muracietlerim td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+}
+.muracietlerim th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+.muracietlerim tr:hover {
+  background-color: #f5f5f5;
 }/*# sourceMappingURL=scss.css.map */
